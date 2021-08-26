@@ -7,6 +7,15 @@
 node_modules/
 dist/
 
+# NextJS
+.next
+/.next/
+/out/
+
+# dotenv environment variables file
+.env
+.env.build
+
 # Compiled Java class files
 *.class
 
