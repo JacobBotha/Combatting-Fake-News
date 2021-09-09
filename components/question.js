@@ -30,7 +30,7 @@ class Question extends React.Component {
 
         // Generate a sequence of answer buttons
         const ansButtons = answers.map((answer) =>
-            <AnswerButton label={answer.text}
+            <AnswerButton key={answer.text} label={answer.text}
                 onClick={answer.isCorrect ? this.CorrectAnswer : this.WrongAnswer} />
         );
 
