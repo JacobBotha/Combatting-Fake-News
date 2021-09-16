@@ -15,6 +15,7 @@ dist/
 # dotenv environment variables file
 .env
 .env.build
+.env.local
 
 # Compiled Java class files
 *.class
