@@ -1,4 +1,5 @@
 import React from 'react';
+import Answer from '../../../components/answer';
 import CountDown from '../../../components/count_down';
 import Question from '../../../components/question';
 import styles from '../../../styles/Home.module.css';
@@ -8,38 +9,47 @@ export default class SoloQuiz extends React.Component {
     super(props);
     this.state = { countdownDone: false };
     this.state = { currentQuestion: 0 };
+    this.state = { score: 0 };
     this.setCountdownDone = this.setCountdownDone.bind(this);
+   
+    this.updateScore = this.updateScore.bind(this);
   }
 
   setCountdownDone() {
     this.setState({ countdownDone: true });
   };
 
+  answerQuestion(isCorrect){
+    if (isCorrect){
+      this.setState(prevState => ({
+        score: prevState.score + 1
+      }));
+    }
+
+    //update question
+  }
+
   render() {
-    console.log('yo ', this.props.questions)
+
+    var ansarr = [<Answer statement="True" isCorrect={true} answerQuestion={this.updateScore} />,
+    <Answer statement="False" isCorrect={false} answerQuestion={this.updateScore}/>]
+
+    const question = <Question headline="The Sky is blue" answers={ansarr} />
+
+    const ansButtons = ansarr.map((answer, index) =>
+      <React.Fragment> {answer} </React.Fragment>
+    );
+
     return (
       <div className={styles.container}>
         {!this.state.countdownDone
           ? <CountDown countdownDone={this.setCountdownDone} />
-          : <div> <Question question={this.props.questions[this.state.currentQuestion]} /> </div>
+          :  <div> score = {this.state.score}
+            {question}
+            {ansButtons}
+          </div>
         }
       </div>
     );
   }
-}
-
-export async function getServerSideProps({req, res}) {
-  
-  res = await fetch("http://localhost:3000/api/test");
-  const results = await res.json();
-  var questions = [];
-  
-  console.log('hello ', results.length)
-
-  results.forEach(element => {
-    questions.push(element.headline);
-
-  });
-
-  return { props: {questions : JSON.stringify(results) }}
 }
