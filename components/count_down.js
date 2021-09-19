@@ -4,7 +4,7 @@ import React from 'react';
 export default class CountDown extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { seconds: 3 };
+        this.state = { seconds: props.seconds };
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
@@ -26,7 +26,7 @@ export default class CountDown extends React.Component {
         // Check if we're past zero.
         if (this.state.seconds == -1) {
             clearInterval(this.timer);
-            this.props.countdownDone();
+            this.props.countDownDone();
         }
     }
 
@@ -38,7 +38,7 @@ export default class CountDown extends React.Component {
         return (
             // Once timer hits 0 show 'go!' instead 
             <div>
-                {this.state.seconds <= 0 ? 'Go!' :  this.state.seconds}
+                {this.state.seconds <= 0 ? this.props.finished :  this.state.seconds}
             </div>
         );
     }
