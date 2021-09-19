@@ -19,7 +19,7 @@ export default class SoloQuiz extends React.Component {
     this.setState({ countdownDone: true });
   };
 
-  answerQuestion(isCorrect){
+  updateScore(isCorrect){
     if (isCorrect){
       this.setState(prevState => ({
         score: prevState.score + 1

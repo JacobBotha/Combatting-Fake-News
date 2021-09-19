@@ -11,7 +11,8 @@ export default class Answer extends React.Component {
 
 
     handleClick() {
-        this.props.answerQuestion(this.props.isCorrect)
+        this.props.answerQuestion(this.props.isCorrect);
+        this.setState({selected: true});
     }
 
     render() {
