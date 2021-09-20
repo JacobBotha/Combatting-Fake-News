@@ -25,7 +25,7 @@ export default class Navbar extends Component {
     render() {
         return (
             <div className={styles.container}>
-                <h1>Who's Fooling Who </h1>
+                <h1>{"Who's Fooling Who"}</h1>
                 <div className={styles.login}>
                     <SignedIn></SignedIn>
                     <ReactModal 
