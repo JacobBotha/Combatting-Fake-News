@@ -1,6 +1,7 @@
 import React from 'react';
+import styles from './count_down.module.css'
 
-// Counts down from 3, calls props.countDownDone when finished.
+// Counts down from props.seconds, calls props.countDownDone when finished.
 export default class CountDown extends React.Component {
     constructor(props) {
         super(props);
@@ -36,8 +37,8 @@ export default class CountDown extends React.Component {
 
     render() {
         return (
-            // Once timer hits 0 show 'go!' instead 
-            <div>
+            // Once timer hits 0 show finished instead 
+            <div className={styles.main}>
                 {this.state.seconds <= 0 ? this.props.finished :  this.state.seconds}
             </div>
         );

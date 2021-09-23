@@ -5,3 +5,23 @@
 .default {
     background-color: cyan;
 }
+
+.container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+}
+
+.countdown {
+
+        font-family: Baloo Tamma;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 288px;
+        line-height: 496px;
+        text-align: center;
+        
+        color: #EFD55E;
+}

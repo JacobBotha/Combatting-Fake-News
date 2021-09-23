@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Question from "../../components/question";
 import Answer from "../../components/answer";
 import CountDown from '../../components/count_down';
+
+import styles from '../../styles/Quiz.module.css'
+
 import head from "next/head";
 
 export default function Quiz({ quiz, questions }) {
@@ -62,7 +65,7 @@ export default function Quiz({ quiz, questions }) {
   }
 
   const loadingScreen = function () {
-    return (<CountDown countDownDone={startQuiz} seconds={3} finished="GO!" />);
+    return (<div  className={styles.countdown}><CountDown countDownDone={startQuiz} seconds={3} finished="GO!" /></div>);
   }
 
   const quizScreen = function () {
