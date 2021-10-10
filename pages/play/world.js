@@ -29,7 +29,7 @@ export default function World({ levels }) {
             y2={parseInt(levels[index+1].position.top)/100 * dimensions.height + iconSize/2}
             stroke="white"
             strokeWidth="8"
-            stroke-dasharray="16 16"
+            strokeDasharray="16 16"
             key={level.levelNumber}
           />
       )

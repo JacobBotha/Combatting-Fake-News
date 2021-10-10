@@ -97,7 +97,7 @@ export default class LevelIcon extends Component {
                 </div>
                 <div className={this.imagePositions(this.state.iconPosition)}>
                     <div className={styles.image}>
-                        <Image className={styles.transparent} src={"/"+this.state.levelIcon} layout='fill'/>
+                        <Image className={styles.transparent} src={"/"+this.state.levelIcon} alt="" layout='fill'/>
                     </div>
                 </div>
             </div>
