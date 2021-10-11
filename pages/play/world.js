@@ -28,7 +28,7 @@ export default function World({ levels }) {
             y1={parseInt(level.position.top)/100 * dimensions.height + iconSize/2} 
             y2={parseInt(levels[index+1].position.top)/100 * dimensions.height + iconSize/2}
             stroke="white"
-            strokeWidth="8"
+            strokeWidth="4"
             strokeDasharray="16 16"
             key={level.levelNumber}
           />
@@ -47,9 +47,11 @@ export default function World({ levels }) {
             </div>
           )
         }) }
+        <div className={styles.svgContainer}> 
         <svg preserveAspectRatio="none" viewBox={"0 0 " + dimensions.width + " " + dimensions.height} className={styles.svgContentResponsive}>
           {lines()}
         </svg>
+        </div>
     </div>
   );
 }

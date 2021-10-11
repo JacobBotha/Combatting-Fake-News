@@ -2,6 +2,7 @@ import { React, Component } from "react";
 import styles from '../styles/LevelIcon.module.css';
 require('typeface-baloo-tamma')
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default class LevelIcon extends Component {
 
@@ -49,7 +50,7 @@ export default class LevelIcon extends Component {
                 width: "20%",
                 top: "-25%",
 
-                "background-color": "transparent"
+                "backgroundColor": "transparent"
             };
         }
 
@@ -61,7 +62,7 @@ export default class LevelIcon extends Component {
                 top: "100%",
                 left:"0px",
 
-                "background-color": "transparent"
+                "backgroundColor": "transparent"
             };
         }
 
@@ -85,13 +86,15 @@ export default class LevelIcon extends Component {
             return styles.textBottom;       
         }
 
-        return     
+        return;
     }
 
     render() {
         return (
             <div className={this.state.isAvailable ? styles.circleContainer : styles.unavailable}>
-                <div className={styles.outerCircle}><div className={styles.innerCircle}>{this.state.levelNumber}</div></div>
+                <Link href="/play" passHref>
+                <div className={styles.outerCircle}><a className={styles.innerCircle}>{this.state.levelNumber}</a></div>
+                </Link>
                 <div style={this.positionStyle(this.state.namePosition)}>
                     <h3 className={styles.text}>{this.state.levelName}</h3>
                 </div>

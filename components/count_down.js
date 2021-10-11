@@ -38,7 +38,7 @@ export default class CountDown extends React.Component {
     render() {
         return (
             // Once timer hits 0 show finished instead 
-            <div className={styles.main}>
+            <div>
                 {this.state.seconds <= 0 ? this.props.finished :  this.state.seconds}
             </div>
         );
