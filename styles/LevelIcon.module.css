@@ -61,6 +61,11 @@
     color: #FFFFFF;
 }
 
+.innerCircle :hover {
+    width: 110%;
+    height: 110%;
+}
+
 /* .circleContainer{
     width: 10vw;
     height: 10vh;
