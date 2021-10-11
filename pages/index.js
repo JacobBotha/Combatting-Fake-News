@@ -4,7 +4,6 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-<<<<<<< HEAD
     <div className={styles.container}>
       <Head>
         {/* <title>Who's Fooling Who</title>
@@ -72,13 +71,6 @@ export default function Home() {
           </span>
         </a>
       </footer> */}
-=======
-    <div>
-      <h1>Hello World!</h1>
-      <div>
-        {/* <button onClick={LoginModal.openModal}>Open Modal</button> */}
-      </div>
->>>>>>> master
     </div>
   );
 }
