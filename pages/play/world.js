@@ -15,12 +15,17 @@ export default function World({ levels }) {
     }
   }, []);
   
-  const iconSize = 90;
 
   const lines = () => {
     const lines =[]
     for (let index = 0; index < levels.length -1; index++) {
       const level = levels[index];
+      let iconSize = dimensions.width/10;
+      if (iconSize > 120) {
+        iconSize = 120;
+      } else if (iconSize < 70) {
+        iconSize = 70;
+      }
       lines.push( 
           <line 
             x1={parseInt(level.position.left)/100 * dimensions.width + iconSize/2} 
@@ -31,6 +36,7 @@ export default function World({ levels }) {
             strokeWidth="4"
             strokeDasharray="16 16"
             key={level.levelNumber}
+            opacity={levels[index+1].isAvailable ? '100%' : '50%'}
           />
       )
     }
@@ -127,7 +133,7 @@ export async function getServerSideProps() {
         left: "63%"
       },
       namePosition: "top",
-      imagePosition: "right"
+      imagePosition: "left"
   },{
       levelNumber: 7,
       levelName: 'Review your own biases',

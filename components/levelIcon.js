@@ -3,6 +3,7 @@ import styles from '../styles/LevelIcon.module.css';
 require('typeface-baloo-tamma')
 import Image from 'next/image';
 import Link from 'next/link';
+import { height } from "@mui/system";
 
 export default class LevelIcon extends Component {
 
@@ -14,7 +15,8 @@ export default class LevelIcon extends Component {
             levelNumber : props.levelNumber,
             levelName: props.levelName,
             isAvailable: props.isAvailable,
-            levelIcon: props.levelIcon
+            levelIcon: props.levelIcon,
+            iconSize: props.iconSize
         }; 
     }
 
@@ -60,7 +62,7 @@ export default class LevelIcon extends Component {
                 height: "20%",
                 width: "20%",
                 top: "100%",
-                left:"0px",
+                left:"-40%",
 
                 "backgroundColor": "transparent"
             };
@@ -91,14 +93,14 @@ export default class LevelIcon extends Component {
 
     render() {
         return (
-            <div className={this.state.isAvailable ? styles.circleContainer : styles.unavailable}>
-                <Link href="/play" passHref>
-                <div className={styles.outerCircle}><a className={styles.innerCircle}>{this.state.levelNumber}</a></div>
+            <div style={{width: this.state.iconSize, height: this.state.iconSize}}>
+                <Link href={this.state.isAvailable ? '/play' : ''} passHref>
+                <div className={`${styles.outerCircle} ${this.state.isAvailable ? null : styles.unavailable}`}><a className={styles.innerCircle}>{this.state.levelNumber}</a></div>
                 </Link>
-                <div style={this.positionStyle(this.state.namePosition)}>
+                <div className={this.state.isAvailable ? null : styles.unavailable} style={this.positionStyle(this.state.namePosition)}>
                     <h3 className={styles.text}>{this.state.levelName}</h3>
                 </div>
-                <div className={this.imagePositions(this.state.iconPosition)}>
+                <div className={`${this.imagePositions(this.state.iconPosition)} ${this.state.isAvailable ? null : styles.unavailable}`}>
                     <div className={styles.image}>
                         <Image className={styles.transparent} src={"/"+this.state.levelIcon} alt="" layout='fill'/>
                     </div>

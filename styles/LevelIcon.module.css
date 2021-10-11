@@ -36,18 +36,22 @@
     border-radius: 50%;
     border: none;
 
-    min-width: 54.82px;
+    /* min-width: 54.82px;
     min-height: 54.82px;
     max-width: 93.98px;
     max-height: 93.98px;
 
     height: 7.83vw;
-    width: 7.83vw;
+    width: 7.83vw; */
+
+    height: 78.3%;
+    width: 78.3%;
+
 
     display: inline-block;
     margin: 0 auto;
 
-    font-family: BalooTamma;
+    /* font-family: 'Baloo Tamma Regular'; */
     font-style: normal;
     font-weight: normal;
     font-size: 48px;
@@ -56,14 +60,27 @@
     justify-content: center;
     align-items: center;
 
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
-
     color: #FFFFFF;
 }
 
-.innerCircle :hover {
-    width: 110%;
-    height: 110%;
+/* a.innerCircle:hover {
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 100px;
+    max-height: 100px;
+
+    height: 8.5vw;
+    width: 8.5vw;
+} */
+
+div.outerCircle:not(.unavailable):hover {
+    min-width: 77px;
+    min-height: 77px;
+    max-width: 132px;
+    max-height: 132px;
+
+    height: 11vw;
+    width: 11vw;
 }
 
 /* .circleContainer{
@@ -107,6 +124,17 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .text {
+        display: none !important;
+    }
+
+    .innerCircle {
+        font-size: 36px;
+        line-height: 53px;
+    }
+}
+
+@media screen and (max-height: 600px) {
     .text {
         display: none !important;
     }
