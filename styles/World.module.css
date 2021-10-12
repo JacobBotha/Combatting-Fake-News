@@ -1,0 +1,38 @@
+.worldMap {
+    width: 100vw;
+    height: 100vh;
+    /* min-height: 900px;
+    min-width: 960px; */
+}
+
+.container {
+    position: absolute;
+}
+
+.containerUnavailable {
+    position: absolute;
+}
+
+.text {
+    position: relative;
+    color: white;
+    top: 0px;
+    left: 140px;
+}
+
+/* .svgContainer {
+  display: inline-block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding-bottom: 100%; aspect ratio
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svgContentResponsive {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  left: 0;
+} */

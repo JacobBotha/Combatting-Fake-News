@@ -1,0 +1,36 @@
+.container {
+    width: 100vw;
+    height: 100px;
+    background-color: rgb(41, 104, 199);
+    display: flex;
+}
+
+.login {
+    position: absolute;
+    right: 0px;
+    width: 150px;
+    height: 100px;
+    background-color: #f37a17;
+    border: none;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+}
+
+.Modal {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background-color: papayawhip;
+  }
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rebeccapurple;
+  }

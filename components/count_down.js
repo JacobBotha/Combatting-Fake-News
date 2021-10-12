@@ -1,5 +1,4 @@
 import React from 'react';
-
 // Counts down from props.seconds, calls props.countDownDone when finished.
 export default class CountDown extends React.Component {
     constructor(props) {
