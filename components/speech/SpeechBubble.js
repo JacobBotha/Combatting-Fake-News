@@ -1,21 +1,21 @@
 import styled from "styled-components";
+require('typeface-baloo-tamma')
 
 const SpeechBubbleContainerV = styled.div`
   display: flex;
   justify-content: center;
-  width: 600px;
   flex-direction: column;
 `;
 
 const SpeechBubbleContainerH = styled.div`
   display: flex;
   align-items: center;
-  width: 600px;
 `;
 
 const SpeechBox = styled.div`
   flex: 1;
   margin: 0 0;
+  padding: 10px;
   background: #9dcae6;
   font-family: Baloo Tamma;
   font-style: normal;
@@ -23,6 +23,7 @@ const SpeechBox = styled.div`
   font-size: 38px;
   line-height: 65px;
   color: #FFFFFF;
+  border-radius: 10px;
 `;
 
 const SpeechArrowLeft = styled.div`
