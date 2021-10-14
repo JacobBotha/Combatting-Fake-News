@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Question from "../../components/question";
 import Answer from "../../components/answer";
 import CountDown from '../../components/count_down';
+import { useSession } from "next-auth/react";
 
-import styles from '../../styles/Quiz.module.css'
+import styles from '../../styles/Quiz.module.css';
+import cookieCutter from 'cookie-cutter';
 
 import head from "next/head";
 
@@ -16,9 +18,17 @@ export default function Quiz({ quiz, questions }) {
   const [score, setScore] = useState(0);
   const [quizStarted, setQuizStarted] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   //The headline of the current question  
   const headline = questions[questionIndex].headline;
+  
+  //The headline of the current question  
+  const body = questions[questionIndex].headline;
+
+  //User Data
+  const { data: session } = useSession()
 
   //When the question is answered
   const answerQuestion = function(answer, id) {
@@ -28,14 +38,19 @@ export default function Quiz({ quiz, questions }) {
   }
 
   const nextQuestion = function() {
+    setIsAnswered(false);
+    setIsCorrect(false);
+    if (questionIndex + 1 >= questions.length) {
+      finishQuiz();
+      return;
+    }
+
     setQuestionIndex(questionIndex + 1);
     if (isAnswered && isCorrect){
       setScore(score + 1);
       //todo: integrate add time feature
       setTimeLeft(timeLeft + 10);
     }
-    setIsAnswered(false);
-    setIsCorrect(false);
   }
 
   const timeUp = function() {
@@ -80,9 +95,39 @@ export default function Quiz({ quiz, questions }) {
     );
   }
 
+  const finishQuiz = () => {
+    setFinished(true);
+    if (session) {
+      var formData = new FormData();
+      formData.append('user', session.user.id);
+      formData.append('quiz', quiz.link);
+      
+      fetch(process.env.NEXTAUTH_URL + '/quizzes/' + quiz.link, {
+        method: 'POST',
+        body: data
+      });
+    }
+
+    cookieCutter.set(quiz.link, 'complete') 
+  }
+
+  const endScreen = () => {
+    if (failed) {
+      return (
+        //Todo: Insert failed component
+        <h2>Failed</h2>
+      )
+    }
+    
+    return (
+      //Todo: Insert success component
+      <h2>Success</h2>
+    )
+  }
+
   return (
     <div>
-        {quizStarted == false ? loadingScreen() : quizScreen()}
+        {finished ? endScreen() : (quizStarted == false ? loadingScreen() : quizScreen())}
     </div>
   );
 }
