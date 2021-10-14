@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import styled from "styled-components";
-import styles from '../../styles/Quiz.module.css'
+// import styles from '../../styles/Quiz.module.css'
 
 import HealthBar from "../../components/HealthBar";
 import Question from "../../components/Question";
@@ -62,8 +63,12 @@ export default function Quiz({ quiz, questions }) {
   const [health, setHealth] = useState(3);
   const [quizStarted, setQuizStarted] = useState(false);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [failed, setFailed] = useState(false);
+
+
+  const router = useRouter()
 
   //The headline of the current question  
   const headline = questions[questionIndex].headline;
@@ -81,18 +86,18 @@ export default function Quiz({ quiz, questions }) {
     setIsAnswered(true);
   }
 
+  const submitQuestion = () => {
+    setIsSubmitted(true);
+  }
+
   const nextQuestion = function() {
-    setIsAnswered(false);
-    setIsCorrect(false);
-    if (questionIndex + 1 >= questions.length) {
-      finishQuiz();
+    if (questionIndex + 1 >= questions.length || failed) {
+      setFinished(true);
       return;
     }
 
     setQuestionIndex(questionIndex + 1);
-    if (isAnswered && !isCorrect) {
-      setHealth(health - 1);
-    }
+    setIsSubmitted(false);
   }
 
   const startQuiz = function () {
@@ -120,6 +125,63 @@ export default function Quiz({ quiz, questions }) {
     return (<div className={styles.countdown}><CountDown countDownDone={startQuiz} seconds={3} finished="GO!" /></div>);
   }
 
+  const questionBody = () => {
+    return (
+      <>
+        <MainContent>
+          <Question num={questionIndex + 1}>
+            {headline}
+          </Question>
+          <span>
+          {createAnswerButtons()}
+          {/* <button onClick={nextQuestion}>Next</button> */}
+          </span>
+        </MainContent>
+
+        <RightSideContent>
+          <LevelCard width="200px" height={"300px"}/>
+        </RightSideContent>
+      </>
+    );
+  }
+
+  const questionEnd = () => {
+    if (isCorrect) {
+      //Todo: Correct Screen
+      return (
+        <>
+        <h2>Correct</h2>
+        </>
+      )
+    }
+    return (
+      //Todo Incorrect Screen
+      <>
+        <h2>Incorrect</h2>
+      </>
+    )
+  }
+
+  const handleNextButton = () => {
+    if (isAnswered && !isCorrect) {
+      if (health - 1 <= 0) {
+        setHealth(0);
+        setFailed(true);
+      }
+      setHealth(health - 1);
+    }
+    
+    setIsAnswered(false);
+
+    if (finished) {  
+      finishQuiz();
+    } else if (isSubmitted) {
+      nextQuestion();
+    } else {
+      submitQuestion();
+    }
+  }
+
   const quizScreen = function () {
     return (
       <Content>
@@ -128,25 +190,13 @@ export default function Quiz({ quiz, questions }) {
           <HealthBar health={health} />
         </TopContent>
 
-        <MainContent>
-          <Question num={questionIndex + 1}>
-            {headline}
-          </Question>
-          <span>
-          {createAnswerButtons()}
-          <button onClick={nextQuestion}>Next</button>
-          </span>
-        </MainContent>
-
-        <RightSideContent>
-          <LevelCard width="200px" height={"300px"}/>
-        </RightSideContent>
+        {finished ? endScreen() : (isSubmitted ? questionEnd() : questionBody())}
 
         <ExitButton >
           <Image src="/images/exit.svg" alt="exit" width={100} height={100} />
         </ExitButton>
 
-        <SkipButton >
+        <SkipButton onClick={handleNextButton}>
           <Image src="/images/skip1.svg" alt="exit" width={100} height={100} />
         </SkipButton>
       </Content>
@@ -154,7 +204,6 @@ export default function Quiz({ quiz, questions }) {
   }
 
   const finishQuiz = () => {
-    setFinished(true);
     if (session) {
       var formData = new FormData();
       formData.append('user', session.user.id);
@@ -167,6 +216,7 @@ export default function Quiz({ quiz, questions }) {
     }
 
     cookieCutter.set(quiz.link, 'complete') 
+    router.push('/play/world');
   }
 
   const endScreen = () => {
@@ -185,7 +235,7 @@ export default function Quiz({ quiz, questions }) {
 
   return (
     <div>
-        {finished ? endScreen() : (quizStarted == false ? loadingScreen() : quizScreen())}
+        {quizStarted == false ? loadingScreen() : quizScreen()}
     </div>
   );
 }
