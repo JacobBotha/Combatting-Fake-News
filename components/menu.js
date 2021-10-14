@@ -14,7 +14,7 @@ export default function Menu(props) {
             <div className={styles.container}>            
                 <Image src='/images/Level1.svg' layout='fill' alt=''></Image>
             </div>
-            <Image src={muted ? '/images/muted.png' : '/images/sound.png'} width="100" height="100" onClick={() => setMuted(!muted)}></Image>
+            <Image src={muted ? '/images/mute.svg' : '/images/speaker.svg'} width="40" height="40" onClick={() => setMuted(!muted)}></Image>
             <div className={styles.dropdown}>
                 <SignedIn></SignedIn>
             </div>
