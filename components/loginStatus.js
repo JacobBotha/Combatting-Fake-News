@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
-import ReactModal from 'react-modal';
-import styles from '../styles/Navbar.module.css'
 
 export default function LoginStatus() {
     const { data: session } = useSession()

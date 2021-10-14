@@ -1,9 +1,9 @@
-import Navbar from './navbar'
+import Menu from './menu'
 
 export default function Layout({ children }) {
     return (
         <>
-            {/* <Navbar /> */}
+            <Menu></Menu> 
             <main>{children}</main>
         </>
     );
