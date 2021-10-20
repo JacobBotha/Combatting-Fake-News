@@ -6,32 +6,34 @@ import SpeechBubble from "../speech/SpeechBubble";
 
 const FairyQuizRightContainer = styled.div`
   position: absolute;
-  width: 19.5%;
+  width: 41.5%;
   right: 4%;
-  bottom: 5.5%;
+  bottom: 8.7%;
 `;
 
 const FairyQuizWrongContainer = styled.div`
   position: absolute;
-  width: 41.5%;
+  width: 32.9%;
   right: 4%;
   bottom: 9%;
 `;
 
 const SpeechRightContainer = styled(SpeechBubble)`
   position: absolute;
-  top: 44%;
-  left: 27.5%;
-  width: 30%;
+  top: 15.4%;
+  left: 22.5%;
+  width: 38%;
   font-size: max(1.7vh, 10.2px);
+  text-align: center;
 `;
 
 const SpeechWrongContainer = styled(SpeechBubble)`
   position: absolute;
   top: 26%;
-  left: 22.5%;
-  width: 38%;
+  left: 27.5%;
+  width: 30%;
   font-size: max(3vh, 18px);
+  text-align: center;
 `;
 
 const FairyQuiz = ({ isCorrect }) => {
@@ -39,9 +41,9 @@ const FairyQuiz = ({ isCorrect }) => {
     return (
       <>
         <FairyQuizRightContainer>
-          <Image src="/images/fairy3.svg" width={948} height={1746} />
+          <Image src="/images/fairy2.svg" width={994} height={1634} />
         </FairyQuizRightContainer>
-        <SpeechRightContainer type="right">Congratulations!
+        <SpeechRightContainer type="left" color="#F9C2A3">Congratulations! <br/>
         You have successfully unlocked this level! </SpeechRightContainer>
       </>
     );
@@ -49,9 +51,9 @@ const FairyQuiz = ({ isCorrect }) => {
     return (
       <>
         <FairyQuizWrongContainer>
-          <Image src="/images/fairy4.svg" width={1194} height={1634} />
+          <Image src="/images/fairy5.svg" width={948} height={1746} />
         </FairyQuizWrongContainer>
-        <SpeechWrongContainer type="right">Sorry! You failed!</SpeechWrongContainer>
+        <SpeechWrongContainer type="left">Sorry! You failed!</SpeechWrongContainer>
       </>
     );
   }

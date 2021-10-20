@@ -6,7 +6,7 @@ const OuterBox = styled.div`
   position: absolute;
   width: 23%;
   height: 44%;
-  top: 34%;
+  top: 40%;
   left: 30%;
   font-size: max(2.8vh, 12px);
   border-radius: 10%/6.1%;

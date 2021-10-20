@@ -13,6 +13,9 @@ import NoseBar from "../../components/NoseBar";
 import Answer from "../../components/answer";
 import CountDown from "../../components/count_down";
 import LevelCard from "../../components/LevelCard";
+import FairyQuiz from "../../components/characters/FariyQuiz";
+import FairyQuestion from "../../components/characters/FariyQuestion";
+import Answers from "../../components/button/answer_button";
 
 const Container = styled.div`
   position: relative;
@@ -21,6 +24,13 @@ const Container = styled.div`
   min-height: 600px;
   height: 100vh;
   margin: auto;
+`;
+
+const ShiftedQuizContent = styled.div`
+  position: absolute;
+  left: -20.4%;
+  width: 100%;
+  height: 100%;
 `;
 
 const MiniLevelCard = styled(LevelCard)`
@@ -33,12 +43,14 @@ const MiniLevelCard = styled(LevelCard)`
 
 const ExitButton = styled.div`
   position: absolute;
+  width: 6.9%;
   bottom: 4%;
   left: 5%;
 `;
 
 const SkipButton = styled.div`
   position: absolute;
+  width: 6.9%;
   bottom: 4%;
   right: 4.5%;
 `;
@@ -68,13 +80,11 @@ export default function Quiz({ quiz, questions }) {
 
   //When the question is answered
   const answerQuestion = function (answer, id) {
-    setCurrentAnswer(id);
-    setIsCorrect(answer);
-    setIsAnswered(true);
-  };
-
-  const submitQuestion = () => {
-    setIsSubmitted(true);
+    if (!isSubmitted) {
+      setCurrentAnswer(id);
+      setIsCorrect(answer);
+      setIsAnswered(true);
+    }
   };
 
   const nextQuestion = function () {
@@ -84,51 +94,12 @@ export default function Quiz({ quiz, questions }) {
     }
 
     setQuestionIndex(questionIndex + 1);
-    setIsSubmitted(false);
     setIsAnswered(false);
     setIsCorrect(false);
   };
 
   const startQuiz = function () {
     setQuizStarted(true);
-  };
-  //The answer buttons to display
-  const createAnswerButtons = function () {
-    const question = questions[questionIndex];
-    if (question.questionType == "True or False") {
-      const isCorrect = question.answers[0].answer;
-      return [
-        <Answer
-          statement="True"
-          isCorrect={isCorrect == true}
-          highlight={isAnswered && currentAnswer == 1}
-          answerQuestion={answerQuestion}
-          answerId={1}
-          key="1"
-        />,
-        <Answer
-          statement="False"
-          isCorrect={isCorrect == false}
-          highlight={isAnswered && currentAnswer == 0}
-          answerQuestion={answerQuestion}
-          answerId={0}
-          key="0"
-        />,
-      ];
-    } else if (question.questionType == "Multiple Choice") {
-      return question.answers.map((answer, index) => (
-        <Answer
-          statement={answer.statement}
-          isCorrect={answer.answer}
-          highlight={isAnswered && currentAnswer == index}
-          answerQuestion={answerQuestion}
-          answerId={index}
-          key={index}
-        />
-      ));
-    } else {
-      return [];
-    }
   };
 
   const loadingScreen = function () {
@@ -143,53 +114,55 @@ export default function Quiz({ quiz, questions }) {
     return (
       <>
         <Question num={questionIndex + 1}>{headline}</Question>
-        <span>{createAnswerButtons()}</span>
-
-        <MiniLevelCard hideText />
-        <ExitButton onClick={handleNextButton}>
+        <Answers
+          question={questions[questionIndex]}
+          answerQuestion={answerQuestion}
+        />
+        <ExitButton>
           <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
         </ExitButton>
-        <ExitButton onClick={handleNextButton}>
-          <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
-        </ExitButton>
+        <SkipButton onClick={handleNextButton}>
+          <Image src="/images/next.svg" alt="next" width={150} height={150} />
+        </SkipButton>
       </>
     );
   };
 
   const questionEnd = () => {
-    if (isCorrect) {
-      //Todo: Correct Screen
-      return (
-        <>
-          <h2>Correct</h2>
-        </>
-      );
-    }
     return (
-      //Todo Incorrect Screen
       <>
-        <h2>Incorrect</h2>
+        <FairyQuestion isCorrect={isCorrect} />
+        <ShiftedQuizContent>
+          <Question num={questionIndex + 1}>{headline}</Question>
+          <Answers
+            question={questions[questionIndex]}
+            answerQuestion={answerQuestion}
+          />
+        </ShiftedQuizContent>
+        <SkipButton onClick={handleNextButton}>
+          <Image src="/images/next.svg" alt="next" width={150} height={150} />
+        </SkipButton>
       </>
     );
   };
 
   const handleNextButton = () => {
-    if (isAnswered && !isCorrect) {
-      if (health - 1 <= 0) {
-        setHealth(0);
-        setFailed(true);
+    if (isSubmitted) {
+      nextQuestion();
+      setIsSubmitted(false);
+    } else {
+      if (!isCorrect) {
+        if (health - 1 <= 0) {
+          setHealth(0);
+          setFailed(true);
+        }
+        setHealth(health - 1);
       }
-      setHealth(health - 1);
+      setIsSubmitted(true);
     }
-
-    setIsAnswered(false);
 
     if (finished) {
       finishQuiz();
-    } else if (isSubmitted) {
-      nextQuestion();
-    } else {
-      submitQuestion();
     }
   };
 
@@ -201,6 +174,7 @@ export default function Quiz({ quiz, questions }) {
           questionMax={questions.length}
         />
         <HealthBar health={health} />
+        {finished ? <LevelCard /> : <MiniLevelCard hideText />}
         {finished ? endScreen() : isSubmitted ? questionEnd() : questionBody()}
       </Container>
     );
@@ -223,16 +197,27 @@ export default function Quiz({ quiz, questions }) {
   };
 
   const endScreen = () => {
-    if (failed) {
-      return (
-        //Todo: Insert failed component
-        <h2>Failed</h2>
-      );
-    }
-
     return (
-      //Todo: Insert success component
-      <h2>Success</h2>
+      <>
+        <FairyQuiz isCorrect={health > 0} />
+        <ExitButton>
+          <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
+        </ExitButton>
+        {health > 0 ? (
+          <SkipButton onClick={handleNextButton}>
+            <Image src="/images/next.svg" alt="next" width={150} height={150} />
+          </SkipButton>
+        ) : (
+          <SkipButton>
+            <Image
+              src="/images/restart.svg"
+              alt="restart"
+              width={440}
+              height={89}
+            />
+          </SkipButton>
+        )}
+      </>
     );
   };
 

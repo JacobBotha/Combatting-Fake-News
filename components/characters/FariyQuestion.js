@@ -10,22 +10,27 @@ const FairyQuestionContainer = styled.div`
   right: 4%;
   bottom: 5.5%;
 `;
+
+const FairyQuestionContainerFlipped = styled(FairyQuestionContainer)`
+  transform: scaleX(-1);
+`;
 const SpeechContainer = styled(SpeechBubble)`
   position: absolute;
   top: 44%;
   left: 54%;
   width: 21.5%;
-  font-size: max(2.3vh, 13.8px);
+  font-size: max(1.9vh, 12.6px);
+  text-align: center;
 `;
 
 const FairyQuestion = ({ isCorrect }) => {
   if (isCorrect) {
     return (
       <>
-        <FairyQuestionContainer>
-          <Image src="/images/fairy3.svg" width={280} height={540} />
-        </FairyQuestionContainer>
-        <SpeechContainer type="right">Awesome! You are right!</SpeechContainer>
+        <FairyQuestionContainerFlipped>
+          <Image src="/images/fairy1.svg" width={280} height={540} />
+        </FairyQuestionContainerFlipped>
+        <SpeechContainer type="left">Awesome! You are right!</SpeechContainer>
       </>
     );
   } else {
@@ -34,7 +39,7 @@ const FairyQuestion = ({ isCorrect }) => {
         <FairyQuestionContainer>
           <Image src="/images/fairy4.svg" width={280} height={540} />
         </FairyQuestionContainer>
-        <SpeechContainer type="right">Opps! You missed the answer!</SpeechContainer>
+        <SpeechContainer type="left">Opps! You missed the answer!</SpeechContainer>
       </>
     );
   }

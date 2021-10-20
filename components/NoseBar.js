@@ -56,7 +56,7 @@ const NoseBar = ({ questionNum, questionMax }) => {
             <NoseContainer>
                </NoseContainer>
             <TextContainer>
-                <Numerator>{questionNum == "1" ? questionNum : "?"}</Numerator>/{questionMax ? questionMax : "?"}
+                <Numerator>{questionNum}</Numerator>/{questionMax}
             </TextContainer>
         </ContainerH>
     );

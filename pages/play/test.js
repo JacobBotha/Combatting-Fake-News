@@ -6,6 +6,7 @@ import SpeechBubble from "../../components/speech/SpeechBubble";
 import HealthBar from "../../components/HealthBar";
 import NoseBar from "../../components/NoseBar";
 import LevelCard from "../../components/LevelCard";
+import Answers from "../../components/button/answer_button";
 
 const PageContent = styled.div`
   display: flex;
@@ -23,6 +24,7 @@ const PageContentBottom = styled.div`
 export default function test() {
   return (
     <PageContent>
+            
       <Image src="/pinocchio-logo.png" alt="logo" width={1438} height={525} />
       <PageContentBottom>
         <Image src="/fairy.png" alt="logo" width={265} height={380} />
@@ -58,6 +60,7 @@ export default function test() {
       <NoseBar />
       <LevelCard width="336px" height="454px"/>
       <LevelCard width="236px" height="324px"/>
+      <Answers/>
     </PageContent>
     
   );

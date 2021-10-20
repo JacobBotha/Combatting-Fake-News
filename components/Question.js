@@ -2,19 +2,15 @@ import styled from "styled-components";
 require("typeface-baloo-tamma");
 
 const QuestionBox = styled.div`
-  z-index: 2;
   position: absolute;
   width: 41%; //588
   height: 47.5%; //486
   top: 22.5%;
-  left: 27.5%;
-  margin-left: 56px;
-  padding-top: 44px;
+  left: 31.5%;
   background: #89d0c2;
   font-family: Baloo Tamma;
   font-style: normal;
   font-weight: normal;
-  font-size: 38px;
   color: #000000;
   box-shadow: 4px #00000099;
   border-radius: 3.4%/4.1%;
