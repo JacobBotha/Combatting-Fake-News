@@ -52,7 +52,7 @@ const PinocchioStory = ({sceneNum}) => {
             <Image src="/images/pinocchio2.svg" alt="pinnochio" width={480} height={332.51} />
           </FlippedPinocchioStoryContainer>
           <SpeechContainer type="bottomleft">
-            Let's start the adventure!
+            Let&apos;s start the adventure!
           </SpeechContainer>
         </>
       );

@@ -91,14 +91,15 @@ export default function Story() {
       return (
         <>
           <LeftButton>
-            <Link href={"/play"}>
-              <Image src="/images/skip2.svg" width={300} height={160} />
+            <Link href={"/play"} passHref>
+              <Image src="/images/skip2.svg" alt="skip" width={300} height={160} />
             </Link>
           </LeftButton>
           <RightButton>
             <Image
               onClick={handleClick}
               src="/images/next.svg"
+              alt="next"
               width={270}
               height={200}
             />
@@ -112,6 +113,7 @@ export default function Story() {
           <Image
               onClick={handleClick}
               src="/images/next.svg"
+              alt="next"
               width={270}
               height={200}
             />
@@ -125,7 +127,7 @@ export default function Story() {
     return (
       <>
         <JailContainer>
-          <Image src="/images/jail.svg" width={2410} height={1056} />
+          <Image src="/images/jail.svg" alt="jail" width={2410} height={1056} />
         </JailContainer>
         <JailSpeechContainer type="bottomleft">Please help us!</JailSpeechContainer>
         <FakeNewsTextShadow>Fake News</FakeNewsTextShadow>

@@ -87,7 +87,7 @@ const Answers = ({ className, type, answerQuestion, question }) => {
       <AnswerBox className={className}>
         <Container>
           {question.answers.map((answer, index) => (
-            <AnswerCircle onClick={() => answerQuestion(answer.answer, index)} color={colors[index]}>
+            <AnswerCircle key={index} onClick={() => answerQuestion(answer.answer, index)} color={colors[index]}>
               <AnswerText>{answer.statement}</AnswerText>
             </AnswerCircle>
           ))}

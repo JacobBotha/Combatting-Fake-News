@@ -62,7 +62,7 @@ const FairyStory = ({ sceneNum }) => {
       return (
         <>
           <FairyStoryContainer>
-            <Image src="/images/fairy1.svg" width={378} height={737} />
+            <Image src="/images/fairy1.svg" alt="fairy" width={378} height={737} />
           </FairyStoryContainer>
           <SpeechContainer type="bottomright">
             Only you unlock all skills can you guys back to the fairy tale.
@@ -73,7 +73,7 @@ const FairyStory = ({ sceneNum }) => {
       return (
         <>
           <FairyStoryFinalContainer>
-            <Image src="/images/fairy.svg" width={522} height={714} />
+            <Image src="/images/fairy.svg" alt="fairy" width={522} height={714} />
           </FairyStoryFinalContainer>
           <SpeechFinalContainer type="right">
             Please complete each quiz within 3 chances of making mistakes to
