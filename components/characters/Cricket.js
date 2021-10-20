@@ -22,7 +22,7 @@ const Cricket = () => {
   return (
     <>
       <CricketContainer>
-        <Image src="/images/cricket.svg" width={570} height={1050} />
+        <Image src="/images/cricket.svg" alt="cricket" width={570} height={1050} />
       </CricketContainer>
         <SpeechContainer type="left" color="#8EB2E7">
           Do you want to know if you are a master at identifying fake news?

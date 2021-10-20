@@ -107,6 +107,7 @@ const LevelCard = ({ className, level, hideText }) => {
           <ImageDiv>
             <Image
               src={"/images/Level" + (level ? level : 1) + ".svg"}
+              alt="levelicon"
               layout="responsive"
               width={350}
               height={350}

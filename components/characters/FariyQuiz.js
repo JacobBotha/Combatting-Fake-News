@@ -41,7 +41,7 @@ const FairyQuiz = ({ isCorrect }) => {
     return (
       <>
         <FairyQuizRightContainer>
-          <Image src="/images/fairy2.svg" width={994} height={1634} />
+          <Image src="/images/fairy2.svg" alt="fairy" width={994} height={1634} />
         </FairyQuizRightContainer>
         <SpeechRightContainer type="left" color="#F9C2A3">Congratulations! <br/>
         You have successfully unlocked this level! </SpeechRightContainer>
@@ -51,7 +51,7 @@ const FairyQuiz = ({ isCorrect }) => {
     return (
       <>
         <FairyQuizWrongContainer>
-          <Image src="/images/fairy5.svg" width={948} height={1746} />
+          <Image src="/images/fairy5.svg" alt="fairy" width={948} height={1746} />
         </FairyQuizWrongContainer>
         <SpeechWrongContainer type="left">Sorry! You failed!</SpeechWrongContainer>
       </>

@@ -23,7 +23,7 @@ const FairyHome = () => {
   return (
     <>
       <FairyHomeContainer>
-        <Image src="/images/fairy2.svg" width={454} height={760} />
+        <Image src="/images/fairy2.svg" alt="pinnochio" width={454} height={760} />
       </FairyHomeContainer>
       <SpeechContainer type="right">
           Acquire your superpower by helping Pinocchio in this adventure!

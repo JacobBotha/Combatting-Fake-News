@@ -36,7 +36,7 @@ const SignPost = () => {
     <>
      <Link href={"/play/story"}>
       <SignPostContainer>
-        <Image src="/images/signpost.svg" width={662} height={686} />
+        <Image src="/images/signpost.svg" alt="signpost" width={662} height={686} />
         <EnterText> ENTER </EnterText>
       </SignPostContainer>
       </Link>

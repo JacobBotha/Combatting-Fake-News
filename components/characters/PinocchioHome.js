@@ -13,7 +13,7 @@ const PinocchioHome = () => {
   return (
     <>
       <PinocchioHomeContainer>
-      <Image src="/images/game-icon.svg" width={2000} height={730} />
+      <Image src="/images/game-icon.svg" alt="pinnochio" width={2000} height={730} />
       </PinocchioHomeContainer>
     </>
   );

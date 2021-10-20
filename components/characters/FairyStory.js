@@ -42,7 +42,7 @@ const FairyStory = ({ sceneNum }) => {
       return (
         <>
           <FairyStoryContainer>
-            <Image src="/images/fairy1.svg" width={378} height={737} />
+            <Image src="/images/fairy1.svg" alt="fairy" width={378} height={737} />
           </FairyStoryContainer>
         </>
       );
@@ -50,7 +50,7 @@ const FairyStory = ({ sceneNum }) => {
       return (
         <>
           <FairyStoryContainer>
-            <Image src="/images/fairy1.svg" width={378} height={737} />
+            <Image src="/images/fairy1.svg" alt="fairy" width={378} height={737} />
           </FairyStoryContainer>
           <SpeechContainer type="bottomright">
             Sure, You need to return to a real boy and unlock 7 skills as the

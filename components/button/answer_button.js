@@ -70,14 +70,14 @@ const Answers = ({ className, type, answerQuestion, question }) => {
               answerQuestion(question.answers[0].answer == true, 0)
             }
           >
-            <Image src="/images/correct-button.png" width={294} height={222} />
+            <Image src="/images/correct-button.png" alt="correct" width={294} height={222} />
           </CorrectButton>
           <WrongButton
             onClick={() =>
               answerQuestion(question.answers[0].answer == false, 1)
             }
           >
-            <Image src="/images/wrong-button.png" width={232} height={222} />
+            <Image src="/images/wrong-button.png" alt="wrong" width={232} height={222} />
           </WrongButton>
         </Container>
       </AnswerBoxTF>

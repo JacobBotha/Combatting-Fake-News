@@ -30,7 +30,7 @@ const PinocchioStory = ({sceneNum}) => {
       return (
         <>
           <PinocchioStoryContainer>
-            <Image src="/images/pinocchio1.svg" width={480} height={332.51} />
+            <Image src="/images/pinocchio1.svg" alt="pinnochio" width={480} height={332.51} />
           </PinocchioStoryContainer>
           <SpeechContainer type="bottomleft">
             Could you tell me how can I save my friends?
@@ -41,7 +41,7 @@ const PinocchioStory = ({sceneNum}) => {
       return (
         <>
           <PinocchioStoryContainer>
-            <Image src="/images/pinocchio1.svg" width={480} height={332.51} />
+            <Image src="/images/pinocchio1.svg" alt="pinnochio" width={480} height={332.51} />
           </PinocchioStoryContainer>
         </>
       );
@@ -49,7 +49,7 @@ const PinocchioStory = ({sceneNum}) => {
       return (
         <>
           <FlippedPinocchioStoryContainer>
-            <Image src="/images/pinocchio2.svg" width={480} height={332.51} />
+            <Image src="/images/pinocchio2.svg" alt="pinnochio" width={480} height={332.51} />
           </FlippedPinocchioStoryContainer>
           <SpeechContainer type="bottomleft">
             Let's start the adventure!
@@ -60,7 +60,7 @@ const PinocchioStory = ({sceneNum}) => {
       return (
         <>
           <FlippedPinocchioStoryContainer>
-            <Image src="/images/pinocchio2.svg" width={480} height={332.51} />
+            <Image src="/images/pinocchio2.svg" alt="pinnochio" width={480} height={332.51} />
           </FlippedPinocchioStoryContainer>
         </>
       );

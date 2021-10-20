@@ -28,7 +28,7 @@ const FairyQuestion = ({ isCorrect }) => {
     return (
       <>
         <FairyQuestionContainerFlipped>
-          <Image src="/images/fairy1.svg" width={280} height={540} />
+          <Image src="/images/fairy1.svg" alt="fairy" width={280} height={540} />
         </FairyQuestionContainerFlipped>
         <SpeechContainer type="left">Awesome! You are right!</SpeechContainer>
       </>
@@ -37,7 +37,7 @@ const FairyQuestion = ({ isCorrect }) => {
     return (
       <>
         <FairyQuestionContainer>
-          <Image src="/images/fairy4.svg" width={280} height={540} />
+          <Image src="/images/fairy4.svg" alt="fairy" width={280} height={540} />
         </FairyQuestionContainer>
         <SpeechContainer type="left">Opps! You missed the answer!</SpeechContainer>
       </>
