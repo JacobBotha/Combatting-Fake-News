@@ -3,9 +3,11 @@ import Image from "next/image";
 require('typeface-baloo-tamma')
 
 const ContainerH = styled.div`
-  position: relative;
-  width: 600px;
-  height: 100px;
+  position: absolute;
+  width: 9%;
+  height: 5%;
+  top: 3%;
+  left: 4.5%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -20,7 +22,6 @@ const ContainerH = styled.div`
 const BaseContainer = styled.div`
   position: absolute;
 `;
-
 
 const NoseContainer = styled.div`
   position: relative;
@@ -55,7 +56,7 @@ const NoseBar = ({ questionNum, questionMax }) => {
             <NoseContainer>
                </NoseContainer>
             <TextContainer>
-                <Numerator>{questionNum ? questionNum : "?"}</Numerator>/{questionMax ? questionMax : "?"}
+                <Numerator>{questionNum == "1" ? questionNum : "?"}</Numerator>/{questionMax ? questionMax : "?"}
             </TextContainer>
         </ContainerH>
     );

@@ -1,56 +1,66 @@
-import { Children } from "react";
 import styled from "styled-components";
-require('typeface-baloo-tamma')
+require("typeface-baloo-tamma");
 
 const QuestionBox = styled.div`
-  position: relative;
-  width: 588px;
-  height: 486px;
+  z-index: 2;
+  position: absolute;
+  width: 41%; //588
+  height: 47.5%; //486
+  top: 22.5%;
+  left: 27.5%;
   margin-left: 56px;
   padding-top: 44px;
-  background: #89D0C2;
+  background: #89d0c2;
   font-family: Baloo Tamma;
   font-style: normal;
   font-weight: normal;
   font-size: 38px;
   color: #000000;
   box-shadow: 4px #00000099;
-  border-radius: 20px;
+  border-radius: 3.4%/4.1%;
 `;
 
 const ContentBox = styled.div`
-  width: 588px;
-  height: 373px;
-  margin-left: -56px;
-  padding: 25px;
-  background: #FFFFFF;
+  position: absolute;
+  width: 100%;
+  height: 76.7%;
+  top: 17.9%;
+  left: -9.5%;
+  padding: 2%;
+  background: #ffffff;
   font-family: arial;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   color: #000000;
   box-shadow: 5px 5px 4px #00000099;
-  border-radius: 20px;
+  border-radius: 3.4%/5.35%;
 `;
 
 const QuestionTriangle = styled.div`
-  width: 0;
-  height: 0;
-  margin-left: -50px;
-  margin-bottom: -5px;
-  border-style: solid;
-  border-width: 0 0 50px 50px;
-  border-color: transparent transparent #FFFFFF transparent;
+  position: absolute;
+  width: 8.45%;
+  height: 13.13%;
+  top: -11.5%;
+  left: 1.1%;
+  background: linear-gradient(
+    to top left,
+    #fff 0%,
+    #fff 50%,
+    transparent 50%,
+    transparent 100%
+  );
 `;
 
 const QuestionText = styled.div`
   position: absolute;
-  top: 15px;
-  left: 115px;
+  top: 2.3%;
+  left: 19.5%;
   font-style: normal;
   font-weight: normal;
-  font-size: 48px;
-  color: #FFFFFF;
+  font-size: max(5.2vh, 31.2px);
+  line-height: max(8.6vh, 51.6px);
+  color: #ffffff;
   background-color: transparent;
   &:before {
     content: "Question";
@@ -59,33 +69,31 @@ const QuestionText = styled.div`
 
 const QuestionNum = styled.div`
   position: absolute;
-  top: 23px;
-  right: 115px;
-  height: 48px;
-  width: 48px;
+  top: 4.7%;
+  left: 72.28%;
+  height: 9.8%;
+  width: 8.1%;
   font-style: normal;
   font-weight: normal;
-  font-size: 36px;
+  font-size: max(3.9vh, 23.4px);
+  line-height: max(5.7vh, 34.2px);
   text-align: center;
-  color: #FF7777;
-  background-color: #FFFFFF;
+  color: #ff7777;
+  background-color: #ffffff;
   border-radius: 50%;
 `;
 
-const Question = ({ children, num }) => {
-
+const Question = ({ className, children, num }) => {
   return (
-    <QuestionBox>
+    <QuestionBox className={className}>
       <QuestionText />
-      <QuestionNum>
-        {num}
-      </QuestionNum>
-      <QuestionTriangle />
+      <QuestionNum>{num}</QuestionNum>
       <ContentBox>
+        <QuestionTriangle />
         {children}
       </ContentBox>
     </QuestionBox>
   );
-}
+};
 
 export default Question;

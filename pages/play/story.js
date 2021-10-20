@@ -33,9 +33,9 @@ const RightButton = styled.div`
 
 const CenterButton = styled.div`
   position: absolute;
-  width: 10.5%;
-  bottom: 6%;
-  left: 44.75%;
+  width: 14%;
+  bottom: 3%;
+  left: 43%;
 `;
 
 const JailContainer = styled.div`
@@ -109,9 +109,12 @@ export default function Story() {
       return (
         <>
           <CenterButton>
-            <Link href={"/play"}>
-              <Image src="/images/go-button.svg" width={300} height={300} />
-            </Link>
+          <Image
+              onClick={handleClick}
+              src="/images/next.svg"
+              width={270}
+              height={200}
+            />
           </CenterButton>
         </>
       );
