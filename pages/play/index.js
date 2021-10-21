@@ -172,6 +172,7 @@ export default function Quiz({ quiz, questions }) {
         <NoseBar
           questionNum={questionIndex + 1}
           questionMax={questions.length}
+          isFinished={finished && health > 0}
         />
         <HealthBar health={health} />
         {finished ? <LevelCard /> : <MiniLevelCard hideText />}
