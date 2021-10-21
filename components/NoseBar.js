@@ -30,10 +30,10 @@ const TextContainer = styled.div`
   left: ${(props) => props.ratio * 60 + 9.5 + "%"};
   width: 10%;
   font-family: Baloo Tamma;
-  font-size: 36px;
+  font-size: max(5vh, 30px);
   font-style: normal;
   font-weight: 400;
-  line-height: 62px;
+  line-height:  max(7vh, 42px);;
   letter-spacing: 0em;
   color: #FFFFFF;
 `;

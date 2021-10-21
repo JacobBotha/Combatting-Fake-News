@@ -57,7 +57,7 @@ const SkipButton = styled.div`
 
 export default function Quiz({ quiz, questions }) {
   //currentAnswer is the key of the answer button
-  const [currentAnswer, setCurrentAnswer] = useState(0);
+  const [currentAnswer, setCurrentAnswer] = useState(-1);
   const [isCorrect, setIsCorrect] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [health, setHealth] = useState(3);
@@ -73,7 +73,7 @@ export default function Quiz({ quiz, questions }) {
   const headline = questions[questionIndex].headline;
 
   //The headline of the current question
-  const body = questions[questionIndex].headline;
+  const body = questions[questionIndex].body;
 
   //User Data
   const { data: session } = useSession();
@@ -113,10 +113,12 @@ export default function Quiz({ quiz, questions }) {
   const questionBody = () => {
     return (
       <>
-        <Question num={questionIndex + 1}>{headline}</Question>
+        <Question num={questionIndex + 1}><h3>{headline} </h3><p>{body} </p></Question>
         <Answers
           question={questions[questionIndex]}
           answerQuestion={answerQuestion}
+          isSelected={currentAnswer}
+          isSubmitted={isSubmitted}
         />
         <ExitButton>
           <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
@@ -133,10 +135,12 @@ export default function Quiz({ quiz, questions }) {
       <>
         <FairyQuestion isCorrect={isCorrect} />
         <ShiftedQuizContent>
-          <Question num={questionIndex + 1}>{headline}</Question>
+        <Question num={questionIndex + 1}><h3>{headline}</h3><p>{body} </p></Question>
           <Answers
             question={questions[questionIndex]}
             answerQuestion={answerQuestion}
+            isSelected={currentAnswer}
+            isSubmitted={isSubmitted}
           />
         </ShiftedQuizContent>
         <SkipButton onClick={handleNextButton}>
@@ -150,6 +154,7 @@ export default function Quiz({ quiz, questions }) {
     if (isSubmitted) {
       nextQuestion();
       setIsSubmitted(false);
+      setCurrentAnswer(-1);
     } else {
       if (!isCorrect) {
         if (health - 1 <= 0) {
