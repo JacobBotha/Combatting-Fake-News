@@ -225,9 +225,9 @@ export default function Quiz({ quiz, questions }) {
 }
 
 export async function getServerSideProps(context) {
-  const { id } = context.query;
+  const { quizLink } = context.query;
   const res = await fetch(
-    process.env.NEXTAUTH_URL + "/api/quizzes/" + id
+    "http://localhost:8081/api/quizzes/" + quizLink
   );
   const results = await res.json();
 
