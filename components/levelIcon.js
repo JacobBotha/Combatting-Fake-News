@@ -10,12 +10,12 @@ export default class LevelIcon extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            iconPosition: props.iconPosition,
-            namePosition: props.namePosition,
-            levelNumber : props.levelNumber,
-            levelName: props.levelName,
-            isAvailable: props.isAvailable,
-            levelIcon: props.levelIcon,
+            iconPosition: props.level.imagePosition,
+            namePosition: props.level.namePosition,
+            levelNumber : props.level.levelNumber,
+            levelName: props.level.levelName,
+            isAvailable: props.level.isAvailable,
+            levelIcon: props.level.image,
             iconSize: props.iconSize
         }; 
     }
@@ -94,7 +94,7 @@ export default class LevelIcon extends Component {
     render() {
         return (
             <div style={{width: this.state.iconSize, height: this.state.iconSize}}>
-                <Link href={this.state.isAvailable ? '/play' : ''} passHref>
+                <Link href={this.state.isAvailable ? '/play/' + this.props.level.link : ''} passHref>
                 <div className={`${styles.outerCircle} ${this.state.isAvailable ? null : styles.unavailable}`}><a className={styles.innerCircle}>{this.state.levelNumber}</a></div>
                 </Link>
                 <div className={this.state.isAvailable ? null : styles.unavailable} style={this.positionStyle(this.state.namePosition)}>

@@ -1,10 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import LevelIcon from "../../components/levelIcon";
 import styles from "../../styles/World.module.css";
+import cookieCutter from "cookie-cutter";
 
-export default function World({ levels }) {
+export default function World(props) {
   const targetRef = useRef();
   const [dimensions, setDimensions] = useState({ width:0, height: 0 });
+  const [levels, setLevels] = useState([]);
+
+  useEffect(() => {
+    if (levels.length === 0) {
+      let alteredlevels = [...props.levels];
+      console.log(alteredlevels)
+      alteredlevels.sort((a, b) => a.levelNumber - b.levelNumber).forEach((level, index, levels) => {
+        if (cookieCutter.get(level.link) === "complete") {
+          if (index < levels.length) levels[index + 1]["isAvailable"] = true;
+          level["isAvailable"] = true;
+        }
+        return level;
+      });
+      setLevels(alteredlevels);
+    }
+  });
 
   useEffect(() => {
     if (targetRef.current) {
@@ -13,8 +30,7 @@ export default function World({ levels }) {
         height: targetRef.current.offsetHeight
       });
     }
-  }, []);
-  
+  }, [targetRef]);  
 
   const lines = () => {
     const lines =[]
@@ -49,7 +65,7 @@ export default function World({ levels }) {
         { levels.map(function(level) {
           return (
             <div key={level.levelNumber} className={level.isAvailable ? styles.container : styles.containerUnavailable} style={level.position}>
-              <LevelIcon levelIcon={level.levelIcon} iconPosition={level.imagePosition} levelName={level.levelName} namePosition={level.namePosition} levelNumber={level.levelNumber} isAvailable={level.isAvailable}></LevelIcon>
+              <LevelIcon level={level}></LevelIcon>
             </div>
           )
         }) }
@@ -63,102 +79,8 @@ export default function World({ levels }) {
 }
 
 export async function getServerSideProps() {
-//   const res = await fetch("http://localhost:3000/api/quizzes/2622dddd5a7838aa21c7b208bea4614bee5957bd9cd97841c170736e7d2222c6");
-//   const results = await res.json();
-  const levels = [{
-      levelNumber: 1,
-      levelName: 'Consider the source',
-      levelIcon: 'images/Level1.svg',
-      isAvailable: true,
-      position: {
-        top: "16%",
-        left: "1%",
-      },
-      namePosition: "right",
-      imagePosition: "bottom"
-  },{
-      levelNumber: 2,
-      levelName: 'Read beyond the headline',
-      levelIcon: 'images/Level2.svg',
-      isAvailable: true,
-      position: {
-        top: "40%",
-        left: "22%"
-      },
-      namePosition: "left",
-      imagePosition: "top"
-  },{
-      levelNumber: 3,
-      levelName: 'Check the authors',
-      levelIcon: 'images/Level3.svg',
-      isAvailable: true,
-      position: {
-        top: "74%",
-        left: "34%"
-      },
-      namePosition: "bottom",
-      imagePosition: "left"
-
-  },{
-      levelNumber: 4,
-      levelName: 'Access the supporting sources',
-      levelIcon: 'images/Level4.svg',
-      isAvailable: false,
-      position: {
-        top: "11%",
-        left: "39%"
-      },
-      namePosition: "right",
-      imagePosition: "left"
-
-  },{
-      levelNumber: 5,
-      levelName: 'Check the date of publication',
-      levelIcon: 'images/Level5.svg',
-      isAvailable: false,
-      position: {
-        top: "63%",
-        left: "50%"
-      },
-      namePosition: "bottom",
-      imagePosition: "left"
-
-  },{
-      levelNumber: 6,
-      levelName: 'Ask if it is a joke',
-      levelIcon: 'images/Level6.svg',
-      isAvailable: false,
-      position: {
-        top: "29% ",
-        left: "63%"
-      },
-      namePosition: "top",
-      imagePosition: "left"
-  },{
-      levelNumber: 7,
-      levelName: 'Review your own biases',
-      levelIcon: 'images/Level7.svg',
-      isAvailable: false,
-      position: {
-        top: "70%",
-        left: "72%"
-      },
-      namePosition: "bottom",
-      imagePosition: "right"
-
-  },{
-      levelNumber: 8,
-      levelName: 'Ask experts',
-      levelIcon: 'images/Level8.svg',
-      isAvailable: false,
-      position: {
-        top: "20%",
-        left: "86%"
-      },
-      namePosition: "top",
-      imagePosition: "left"
-
-  }]
+  const res = await fetch("http://localhost:8081/api/quizzes");
+  const levels =  await res.json();
   return {
     props: {
       levels: levels
