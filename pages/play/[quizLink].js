@@ -225,9 +225,11 @@ export default function Quiz({ quiz, questions }) {
   return <div>{quizStarted == false ? loadingScreen() : quizScreen()}</div>;
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { quizLink } = context.query;
+  // const res = await fetch("http://localhost:8081/api/quizzes/2622dddd5a7838aa21c7b208bea4614bee5957bd9cd97841c170736e7d2222c6");
   const res = await fetch(
-    "http://localhost:8081/api/quizzes/2622dddd5a7838aa21c7b208bea4614bee5957bd9cd97841c170736e7d2222c6"
+    `http://localhost:8081/api/quizzes/${quizLink}`
   );
   const results = await res.json();
 
