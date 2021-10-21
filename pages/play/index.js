@@ -224,11 +224,10 @@ export default function Quiz({ quiz, questions }) {
   return <div>{quizStarted == false ? loadingScreen() : quizScreen()}</div>;
 }
 
-export async function getServerSideProps() {
-  const router = useRouter();
-  const { pid } = router.query;
+export async function getServerSideProps(context) {
+  const { id } = context.query;
   const res = await fetch(
-    process.env.NEXTAUTH_URL + "/api/quizzes/" + pid
+    process.env.NEXTAUTH_URL + "/api/quizzes/" + id
   );
   const results = await res.json();
 

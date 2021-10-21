@@ -4,10 +4,10 @@ export default async function handler(req, res) {
     try {
         const { quizLink } = req.query;
 
-        if (req.methods == 'POST') {
-            const results = lib.submitQuiz(quizLink, user);
-            return res.status(200).json(results);
-        } 
+        // if (req.methods == 'POST') {
+        //     const results = lib.submitQuiz(quizLink, user);
+        //     return res.status(200).json(results);
+        // } 
 
         const results = await lib.getQuiz(quizLink);
         if (results == 404) {
