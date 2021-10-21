@@ -25,6 +25,7 @@ const AnswerBoxTF = styled.div`
   top: 72.56%;
   left: 31.25%;
   color: #ffffff;
+  opacity: ${(props) => props.isSelected};
 `;
 
 const Container = styled.div`
@@ -37,10 +38,21 @@ const Container = styled.div`
 
 const CorrectButton = styled.div`
   width: 27.5%;
+  cursor: pointer;
+  opacity:  ${(props) => props.isSelected ? 1 : 0.4};
+  &:hover {
+    transform: scale(${(props) => props.isSubmitted ? 1 : 1.2});
+  }
 `;
 
 const WrongButton = styled.div`
   width: 21.5%;
+  cursor: pointer;
+  opacity:  ${(props) => props.isSelected ? 1 : 0.4};
+
+  &:hover {
+    transform: scale(${(props) => props.isSubmitted ? 1 : 1.2});
+  }
 `;
 
 const AnswerCircle = styled.div`
@@ -48,8 +60,12 @@ const AnswerCircle = styled.div`
   background-color: ${(props) => props.color};
   border-radius: 50%;
   display: flex;
-
   align-items: center;
+  cursor: pointer;
+  opacity:  ${(props) => props.isSelected ? 1 : 0.4};
+  &:hover {
+    transform: scale(${(props) => props.isSubmitted ? 1 : 1.2});
+  }
 `;
 
 const AnswerText = styled.div`
@@ -58,14 +74,16 @@ const AnswerText = styled.div`
   vertical-align: bottom;
 `;
 
-const colors = ["#EFD55E", "#FF7777", "#89D0C2", "#B7AACB"];
+const colors = ["#EFD55E", "#FF7777", "#F9C2A3", "#B7AACB"];
 
-const Answers = ({ className, type, answerQuestion, question }) => {
+const Answers = ({ className, answerQuestion, question, isSelected, isSubmitted }) => {
   if (question.questionType == "True or False") {
     return (
       <AnswerBoxTF className={className}>
         <Container>
           <CorrectButton
+            isSelected={isSelected == 0 || isSelected == -1}
+            isSubmitted={isSubmitted}
             onClick={() =>
               answerQuestion(question.answers[0].answer == true, 0)
             }
@@ -73,6 +91,8 @@ const Answers = ({ className, type, answerQuestion, question }) => {
             <Image src="/images/correct-button.png" alt="correct" width={294} height={222} />
           </CorrectButton>
           <WrongButton
+            isSelected={isSelected == 1 || isSelected == -1}
+            isSubmitted={isSubmitted}
             onClick={() =>
               answerQuestion(question.answers[0].answer == false, 1)
             }
@@ -87,7 +107,8 @@ const Answers = ({ className, type, answerQuestion, question }) => {
       <AnswerBox className={className}>
         <Container>
           {question.answers.map((answer, index) => (
-            <AnswerCircle key={index} onClick={() => answerQuestion(answer.answer, index)} color={colors[index]}>
+
+            <AnswerCircle isSelected={isSelected == index || isSelected == -1} isSubmitted={isSubmitted} key={index} onClick={() => answerQuestion(answer.answer, index)} color={colors[index]}>
               <AnswerText>{answer.statement}</AnswerText>
             </AnswerCircle>
           ))}

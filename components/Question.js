@@ -33,6 +33,14 @@ const ContentBox = styled.div`
   border-radius: 3.4%/5.35%;
 `;
 
+const HeadlineBox = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  top: 0;
+  left: 0%;
+`;
+
 const QuestionTriangle = styled.div`
   position: absolute;
   width: 8.45%;
@@ -79,7 +87,7 @@ const QuestionNum = styled.div`
   border-radius: 50%;
 `;
 
-const Question = ({ className, children, num }) => {
+const Question = ({ className, children, num, headline }) => {
   return (
     <QuestionBox className={className}>
       <QuestionText />

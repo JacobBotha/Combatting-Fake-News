@@ -34,7 +34,7 @@ const EnterText = styled.div`
 const SignPost = () => {
   return (
     <>
-     <Link href={"/play/story"}>
+     <Link href={"/play/story"} passHref>
       <SignPostContainer>
         <Image src="/images/signpost.svg" alt="signpost" width={662} height={686} />
         <EnterText> ENTER </EnterText>
