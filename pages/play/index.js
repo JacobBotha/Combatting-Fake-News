@@ -225,8 +225,10 @@ export default function Quiz({ quiz, questions }) {
 }
 
 export async function getServerSideProps() {
+  const router = useRouter();
+  const { pid } = router.query;
   const res = await fetch(
-    "http://localhost:8081/api/quizzes/2622dddd5a7838aa21c7b208bea4614bee5957bd9cd97841c170736e7d2222c6"
+    process.env.NEXTAUTH_URL + "/api/quizzes/" + pid
   );
   const results = await res.json();
 
