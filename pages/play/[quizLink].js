@@ -110,16 +110,27 @@ export default function Quiz({ quiz, questions }) {
     );
   };
 
-  const questionBody = () => {
+  const getCorrectAnswer = () => questions[questionIndex].answers.filter((a) => q.answer === 1)[0];
+
+  const questionCard = (selected) => {
     return (
       <>
-        <Question num={questionIndex + 1}><h3>{headline} </h3><p>{body} </p></Question>
+        <Question num={questionIndex + 1}><h3>{headline}</h3><p>{body} </p></Question>
         <Answers
           question={questions[questionIndex]}
           answerQuestion={answerQuestion}
-          isSelected={currentAnswer}
+          isSelected={selected}
           isSubmitted={isSubmitted}
         />
+      </>
+    )
+
+  }
+
+  const questionBody = () => {
+    return (
+      <>
+        {questionCard(currentAnswer)}
         <ExitButton>
           <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
         </ExitButton>
@@ -135,13 +146,7 @@ export default function Quiz({ quiz, questions }) {
       <>
         <FairyQuestion isCorrect={isCorrect} />
         <ShiftedQuizContent>
-        <Question num={questionIndex + 1}><h3>{headline}</h3><p>{body} </p></Question>
-          <Answers
-            question={questions[questionIndex]}
-            answerQuestion={answerQuestion}
-            isSelected={currentAnswer}
-            isSubmitted={isSubmitted}
-          />
+        {questionCard(currentAnswer)}
         </ShiftedQuizContent>
         <SkipButton onClick={handleNextButton}>
           <Image src="/images/next.svg" alt="next" width={150} height={150} />
