@@ -98,6 +98,28 @@ export default function Quiz({ quiz, questions }) {
     setIsCorrect(false);
   };
 
+  const handleNextButton = () => {
+    if (finished) {
+      finishQuiz();
+      return;
+    }
+
+    if (isSubmitted) {
+      nextQuestion();
+      setIsSubmitted(false);
+      setCurrentAnswer(-1);
+    } else {
+      if (!isCorrect) {
+        if (health - 1 <= 0) {
+          setHealth(0);
+          setFailed(true);
+        }
+        setHealth(health - 1);
+      }
+      setIsSubmitted(true);
+    }
+  };
+
   const startQuiz = function () {
     setQuizStarted(true);
   };
@@ -109,8 +131,6 @@ export default function Quiz({ quiz, questions }) {
       </div>
     );
   };
-
-  const getCorrectAnswer = () => questions[questionIndex].answers.filter((a) => q.answer === 1)[0];
 
   const questionCard = (selected) => {
     return (
@@ -153,27 +173,6 @@ export default function Quiz({ quiz, questions }) {
         </SkipButton>
       </>
     );
-  };
-
-  const handleNextButton = () => {
-    if (isSubmitted) {
-      nextQuestion();
-      setIsSubmitted(false);
-      setCurrentAnswer(-1);
-    } else {
-      if (!isCorrect) {
-        if (health - 1 <= 0) {
-          setHealth(0);
-          setFailed(true);
-        }
-        setHealth(health - 1);
-      }
-      setIsSubmitted(true);
-    }
-
-    if (finished) {
-      finishQuiz();
-    }
   };
 
   const quizScreen = function () {
