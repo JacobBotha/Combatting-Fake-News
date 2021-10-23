@@ -32,17 +32,17 @@ export default function Menu(props) {
     
     return (
         <div>
-            <div className={styles.container}>            
+            {/* <div className={styles.container}>             */}
                 <div className={styles.avatar}>
-                    <Image src='/images/Level1.svg' layout='fill' alt=''></Image>
+                    <Image src='/images/Level1.svg'width="100%" height="100%"  alt=''></Image>
                 </div>
                 <div className={styles.speaker}>
-                    <Image src={muted ? '/images/mute.svg' : '/images/speaker.svg'} width="40" height="40" onClick={muteSound}></Image>
+                    <Image src={muted ? '/images/mute.svg' : '/images/speaker.svg'} width="100%" height="100%" onClick={muteSound}></Image>
                 </div>
                 <div className={styles.dropdown}>
                     <SignedIn></SignedIn>
                 </div>
-            </div>
+            {/* </div> */}
         </div>
     );
 }

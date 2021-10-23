@@ -31,8 +31,8 @@ export default function World(props) {
   useEffect(() => {
     if (targetRef.current) {
       setDimensions({
-        width: targetRef.current.offsetWidth,
-        height: targetRef.current.offsetHeight
+        width: window.innerWidth -10,
+        height: window.innerHeight -10
       });
     }
   }, [targetRef]);  

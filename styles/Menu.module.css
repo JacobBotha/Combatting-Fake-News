@@ -13,12 +13,23 @@
 }
 
 .avatar {
-  width: 45%;
-  margin-right: 5%;
+  position: fixed;
+  min-width: 50px;
+  width: 3vw;
+  height: auto;
+  right: 6vw;
+  top: 2vw;
   cursor: pointer;
 }
 
 .speaker {
+  position: fixed;
+  cursor: pointer;
+  min-width: 50px;
+  width: 3vw;
+  height: auto;
+  right: 2vw;
+  top: 2vw;
   cursor: pointer;
 }
 
