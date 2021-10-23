@@ -87,6 +87,14 @@ const QuestionNum = styled.div`
   border-radius: 50%;
 `;
 
+const ContentText = styled.div`
+  width: 100%;
+  padding-right: 10%;
+  padding-left: 10%;
+  height: 100%;
+  overflow: auto;
+`;
+
 const Question = ({ className, children, num, headline }) => {
   return (
     <QuestionBox className={className}>
@@ -94,7 +102,7 @@ const Question = ({ className, children, num, headline }) => {
       <QuestionNum>{num}</QuestionNum>
       <ContentBox>
         <QuestionTriangle />
-        {children}
+        <ContentText> {children} </ContentText>
       </ContentBox>
     </QuestionBox>
   );
