@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -16,6 +16,7 @@ import LevelCard from "../../components/LevelCard";
 import FairyQuiz from "../../components/characters/FariyQuiz";
 import FairyQuestion from "../../components/characters/FariyQuestion";
 import Answers from "../../components/button/answer_button";
+import ReactAudioPlayer from "react-audio-player";
 
 const Container = styled.div`
   position: relative;
@@ -66,6 +67,7 @@ export default function Quiz({ quiz, questions }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [failed, setFailed] = useState(false);
+  const endSound = useRef(null);
 
   const router = useRouter();
 
@@ -164,6 +166,7 @@ export default function Quiz({ quiz, questions }) {
   const questionEnd = () => {
     return (
       <>
+        <ReactAudioPlayer src={isCorrect ? "/sounds/right.wav" : "/sounds/wrong.wav"} onCanPlay={(e) => playSound(e)}/>
         <FairyQuestion isCorrect={isCorrect} />
         <ShiftedQuizContent>
         {questionCard(currentAnswer)}
@@ -206,9 +209,16 @@ export default function Quiz({ quiz, questions }) {
     router.push("/play/world");
   };
 
+  const playSound = (element) => {
+    if (window.localStorage.getItem("muted") !== "true") {
+      element.target.play();
+    }
+  }
+
   const endScreen = () => {
     return (
       <>
+        <ReactAudioPlayer src={health > 0 ? "/sounds/victory.mp3" : "/sounds/lose.wav"} onCanPlay={(e) => playSound(e)}/>
         <FairyQuiz isCorrect={health > 0} />
         <ExitButton>
           <Image src="/images/exit.svg" alt="exit" width={150} height={150} />

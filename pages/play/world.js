@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import LevelIcon from "../../components/levelIcon";
 import styles from "../../styles/World.module.css";
 import cookieCutter from "cookie-cutter";
+import useSoundEffect from "../../components/hooks/useSoundEffect";
+import ReactAudioPlayer from "react-audio-player";
 
 export default function World(props) {
   const targetRef = useRef();
   const [dimensions, setDimensions] = useState({ width:0, height: 0 });
   const [levels, setLevels] = useState([]);
+  const enterSound = useRef(null)
+  const router = useRouter();
 
   useEffect(() => {
     if (levels.length === 0) {
@@ -60,15 +65,24 @@ export default function World(props) {
     return lines;
   };
 
+  const enterLevel = (link) => {
+    if (enterSound !== null && window.localStorage.getItem("muted") !== "true") {
+      enterSound.current.audioEl.current.play();
+    }
+    router.push("/play/" + link);
+  }
+
   return (
     <div className={styles.worldMap} ref={targetRef}>
         { levels.map(function(level) {
           return (
             <div key={level.levelNumber} className={level.isAvailable ? styles.container : styles.containerUnavailable} style={level.position}>
-              <LevelIcon level={level}></LevelIcon>
+              <LevelIcon enterLevel={() => enterLevel(level.link)} level={level}></LevelIcon>
+            
             </div>
           )
         }) }
+        <ReactAudioPlayer src="/sounds/enter.wav" ref={enterSound}/>
         <div className={styles.svgContainer}> 
         <svg preserveAspectRatio="none" viewBox={"0 0 " + dimensions.width + " " + dimensions.height} className={styles.svgContentResponsive}>
           {lines()}

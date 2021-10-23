@@ -98,9 +98,7 @@ export default class LevelIcon extends Component {
     render() {
         return (
             <div style={{width: this.state.iconSize, height: this.state.iconSize}}>
-                <Link href={this.state.isAvailable ? '/play/' + this.props.level.link : ''} passHref>
-                <div style={{cursor: this.cursorType()}}  className={`${styles.outerCircle} ${this.state.isAvailable ? null : styles.unavailable}`}><a className={styles.innerCircle}>{this.state.levelNumber}</a></div>
-                </Link>
+                <div onClick={this.props.enterLevel} style={{cursor: this.cursorType()}}  className={`${styles.outerCircle} ${this.state.isAvailable ? null : styles.unavailable}`}><a className={styles.innerCircle}>{this.state.levelNumber}</a></div>
                 <div className={this.state.isAvailable ? null : styles.unavailable} style={this.positionStyle(this.state.namePosition)}>
                     <h3 className={styles.text}>{this.state.levelName}</h3>
                 </div>

@@ -1,14 +1,29 @@
 .container {
   position:fixed;
-  width:7vh;
-  height:7vw;
+  width:14vw;
+  height:auto;
   min-width: 50px;
   min-height: 50px;
   right:20px;
   top:10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  width: 45%;
+  margin-right: 5%;
+  cursor: pointer;
+}
+
+.speaker {
+  cursor: pointer;
 }
 
 .dropdown {
+  position: fixed;
   display: none;
 }
 
