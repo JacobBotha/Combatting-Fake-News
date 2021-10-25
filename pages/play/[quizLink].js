@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import cookieCutter from "cookie-cutter";
 
 import styled from "styled-components";
@@ -10,7 +11,6 @@ import styles from "../../styles/Quiz.module.css";
 import HealthBar from "../../components/HealthBar";
 import Question from "../../components/Question";
 import NoseBar from "../../components/NoseBar";
-import Answer from "../../components/answer";
 import CountDown from "../../components/count_down";
 import LevelCard from "../../components/LevelCard";
 import FairyQuiz from "../../components/characters/FariyQuiz";
@@ -47,6 +47,7 @@ const ExitButton = styled.div`
   width: 6.9%;
   bottom: 4%;
   left: 5%;
+  cursor: pointer;
 `;
 
 const SkipButton = styled.div`
@@ -54,9 +55,10 @@ const SkipButton = styled.div`
   width: 6.9%;
   bottom: 4%;
   right: 4.5%;
+  cursor: pointer;
 `;
 
-export default function Quiz({ quiz, questions }) {
+export default function Quiz({ quiz, questions, level }) {
   //currentAnswer is the key of the answer button
   const [currentAnswer, setCurrentAnswer] = useState(-1);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -126,6 +128,18 @@ export default function Quiz({ quiz, questions }) {
     setQuizStarted(true);
   };
 
+  const resetQuiz = function () {
+        setCurrentAnswer(-1);
+        setIsCorrect(false);
+        setQuestionIndex(0);
+        setHealth(3);
+        setIsAnswered(false);
+        setQuizStarted(false);
+        setIsSubmitted(false);
+        setFailed(false);
+        setFinished(false);
+      };
+
   const loadingScreen = function () {
     return (
       <div className={styles.countdown}>
@@ -137,7 +151,10 @@ export default function Quiz({ quiz, questions }) {
   const questionCard = (selected) => {
     return (
       <>
-        <Question num={questionIndex + 1}><h3>{headline}</h3><p>{body} </p></Question>
+        <Question num={questionIndex + 1}>
+          <h3>{headline}</h3>
+          <p>{body} </p>
+        </Question>
         <Answers
           question={questions[questionIndex]}
           answerQuestion={answerQuestion}
@@ -145,20 +162,23 @@ export default function Quiz({ quiz, questions }) {
           isSubmitted={isSubmitted}
         />
       </>
-    )
-
-  }
+    );
+  };
 
   const questionBody = () => {
     return (
       <>
         {questionCard(currentAnswer)}
         <ExitButton>
-          <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
+          <Link href={"/play/world"} passHref>
+            <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
+          </Link>
         </ExitButton>
-        <SkipButton onClick={handleNextButton}>
-          <Image src="/images/next.svg" alt="next" width={150} height={150} />
-        </SkipButton>
+        {!(currentAnswer == -1) && (
+          <SkipButton onClick={handleNextButton}>
+            <Image src="/images/next.svg" alt="next" width={150} height={150} />
+          </SkipButton>
+        )}
       </>
     );
   };
@@ -166,11 +186,12 @@ export default function Quiz({ quiz, questions }) {
   const questionEnd = () => {
     return (
       <>
-        <ReactAudioPlayer src={isCorrect ? "/sounds/right.wav" : "/sounds/wrong.wav"} onCanPlay={(e) => playSound(e)}/>
+        <ReactAudioPlayer
+          src={isCorrect ? "/sounds/right.wav" : "/sounds/wrong.wav"}
+          onCanPlay={(e) => playSound(e)}
+        />
         <FairyQuestion isCorrect={isCorrect} />
-        <ShiftedQuizContent>
-        {questionCard(currentAnswer)}
-        </ShiftedQuizContent>
+        <ShiftedQuizContent>{questionCard(currentAnswer)}</ShiftedQuizContent>
         <SkipButton onClick={handleNextButton}>
           <Image src="/images/next.svg" alt="next" width={150} height={150} />
         </SkipButton>
@@ -187,7 +208,11 @@ export default function Quiz({ quiz, questions }) {
           isFinished={finished && health > 0}
         />
         <HealthBar health={health} />
-        {finished ? <LevelCard /> : <MiniLevelCard hideText />}
+        {finished ? (
+          <LevelCard level={level} />
+        ) : (
+          <MiniLevelCard level={level} hideText />
+        )}
         {finished ? endScreen() : isSubmitted ? questionEnd() : questionBody()}
       </Container>
     );
@@ -213,29 +238,34 @@ export default function Quiz({ quiz, questions }) {
     if (window.localStorage.getItem("muted") !== "true") {
       element.target.play();
     }
-  }
+  };
 
   const endScreen = () => {
     return (
       <>
-        <ReactAudioPlayer src={health > 0 ? "/sounds/victory.mp3" : "/sounds/lose.wav"} onCanPlay={(e) => playSound(e)}/>
+        <ReactAudioPlayer
+          src={health > 0 ? "/sounds/victory.mp3" : "/sounds/lose.wav"}
+          onCanPlay={(e) => playSound(e)}
+        />
         <FairyQuiz isCorrect={health > 0} />
         <ExitButton>
-          <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
+          <Link href={"/play/world"} passHref>
+            <Image src="/images/exit.svg" alt="exit" width={150} height={150} />
+          </Link>
         </ExitButton>
         {health > 0 ? (
           <SkipButton onClick={handleNextButton}>
             <Image src="/images/next.svg" alt="next" width={150} height={150} />
           </SkipButton>
         ) : (
-          <SkipButton>
-            <Image
-              src="/images/restart.svg"
-              alt="restart"
-              width={440}
-              height={89}
-            />
-          </SkipButton>
+            <SkipButton onClick={resetQuiz()}>
+              <Image
+                src="/images/restart.svg"
+                alt="restart"
+                width={440}
+                height={89}
+              />
+            </SkipButton>
         )}
       </>
     );
@@ -247,25 +277,38 @@ export default function Quiz({ quiz, questions }) {
 export async function getServerSideProps(context) {
   const { quizLink } = context.query;
   // const res = await fetch("http://localhost:8081/api/quizzes/2622dddd5a7838aa21c7b208bea4614bee5957bd9cd97841c170736e7d2222c6");
-  console.log(quizLink);
-  const res = await fetch(
-    `http://localhost:8081/api/quizzes/${quizLink}`
-  );
-  if (await res.status === 404) {
+
+  const res = await fetch(`http://localhost:8081/api/quizzes/${quizLink}`);
+  if ((await res.status) === 404) {
     return {
       redirect: {
         permanent: false,
         destination: "/quiz-not-found",
       },
-      props:{},
+      props: {},
     };
   }
+
   const results = await res.json();
+
+  // Get all level data
+  const levelRes = await fetch("http://localhost:8081/api/quizzes");
+  const levels = await levelRes.json();
+  
+  var levelData;
+  // Get level data for this link
+  for (var i = 0; i < levels.length; i++) {
+    if (levels[i].link == quizLink) {
+      levelData = levels[i];
+      break;
+    }
+  }
 
   return {
     props: {
       quiz: results.quiz,
       questions: results.questions,
+      level: levelData,
     },
   };
 }

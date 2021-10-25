@@ -22,6 +22,8 @@ const LeftButton = styled.div`
   width: 14%;
   bottom: 3%;
   left: 1%;
+  
+  cursor: pointer;
 `;
 
 const RightButton = styled.div`
@@ -29,6 +31,7 @@ const RightButton = styled.div`
   width: 14%;
   bottom: 3%;
   right: 1%;
+  cursor: pointer;
 `;
 
 const CenterButton = styled.div`
@@ -36,6 +39,7 @@ const CenterButton = styled.div`
   width: 14%;
   bottom: 3%;
   left: 43%;
+  cursor: pointer;
 `;
 
 const JailContainer = styled.div`
@@ -82,7 +86,7 @@ export default function Story() {
     if (sceneNum < 5) {
       setSceneNum(sceneNum + 1);
     } else {
-      router.push("/play");
+      router.push("/play/world");
     }
   };
 
@@ -91,7 +95,7 @@ export default function Story() {
       return (
         <>
           <LeftButton>
-            <Link href={"/play"} passHref>
+            <Link href={"/play/world"} passHref>
               <Image src="/images/skip2.svg" alt="skip" width={300} height={160} />
             </Link>
           </LeftButton>

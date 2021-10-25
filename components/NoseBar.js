@@ -20,7 +20,7 @@ const HeadFinishContainer = styled.div`
 const NoseContainer = styled.div`
   position: absolute;
   left: 9%;
-  top: calc(9.7% - 12px);
+  top: calc(9.3% - 16px);
   width: ${(props) => props.ratio * 60 + "%"};
 `;
 

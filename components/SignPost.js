@@ -10,6 +10,7 @@ const SignPostContainer = styled.div`
   width: 23%;
   height: 32%;
   color: #ffffcc;
+  cursor: pointer;
   &:hover {
     color: #89d0c2;
   }

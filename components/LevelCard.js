@@ -71,42 +71,20 @@ const ImageDiv = styled.div`
   width: 57%;
   bottom: 11.5%;
 `;
-const topText = [
-  "Consider the source",
-  "Read beyond the headline",
-  "Check the authors",
-  "Access the supporting sources",
-  "Check the date of publication",
-  "Ask if it is a joke",
-  "Review your own biases",
-  "Ask experts",
-];
-
-const bottomText = [
-  "(to understand its mission and purpose)",
-  "(to understand the whole story)",
-  "(to see if they are real and credible",
-  "(to ensure they support the claims)",
-  "(to see if the story is relevent and up to date)",
-  "(to deteremine if it is meant to be satire)",
-  "(to see if they are affecting your judgment)",
-  "(to get confirmation from independent people with knowledge)",
-];
 
 const LevelCard = ({ className, level, hideText }) => {
+
   return (
     <div>
       <OuterBox className={className}>
         <InnerBox>
-          <LevelText>Level {level ? level : 1}</LevelText>
+          <LevelText>Level {level.levelNumber}</LevelText>
           <HorizontalLine />
-          <TopTextArea>{topText[level ? level - 1 : 0]}</TopTextArea>
-          {!hideText && (
-            <BottomTextArea>{bottomText[level ? level - 1 : 0]}</BottomTextArea>
-          )}
+          <TopTextArea>{level.levelName}</TopTextArea>
+          {!hideText && <BottomTextArea>{level.levelDescription}</BottomTextArea>}
           <ImageDiv>
             <Image
-              src={"/images/Level" + (level ? level : 1) + ".svg"}
+              src={"/" + level.image}
               alt="levelicon"
               layout="responsive"
               width={350}

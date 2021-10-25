@@ -13,6 +13,7 @@ const handler = async (_, res) => {
             quizFormated.push({
                 levelName: quiz.name,
                 levelNumber: quiz.quizNumber,
+                levelDescription: quiz.description,
                 link: quiz.link,
                 isAvailable: isAvailable,
                 position: JSON.parse(quiz.position),
