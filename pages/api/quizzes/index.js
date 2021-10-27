@@ -8,7 +8,6 @@ const handler = async (_, res) => {
         for (let quiz of results) {
             let isAvailable = false;
             if (quiz.quizNumber === 1) isAvailable = true;
-            console.log(quiz.quizNumber, ", ")
             //  JSON.parse(quiz.position));
             quizFormated.push({
                 levelName: quiz.name,

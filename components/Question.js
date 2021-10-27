@@ -93,6 +93,8 @@ const ContentText = styled.div`
   padding-left: 10%;
   height: 100%;
   overflow: auto;
+  text-align: justify;
+  text-justify: inter-word;
 `;
 
 const Question = ({ className, children, num, headline }) => {

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import ReactAudioPlayer from "react-audio-player";
 
 import FairyStory from "../../components/characters/FairyStory";
 import PinocchioStory from "../../components/characters/PinocchioStory";
@@ -78,11 +79,16 @@ const FakeNewsTextShadow = styled(FakeNewsText)`
 
 export default function Story() {
   const [sceneNum, setSceneNum] = useState(0);
-
+  const enterSound = useRef(null)
   const router = useRouter();
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    if (enterSound !== null && window.localStorage.getItem("muted") !== "true") {
+      enterSound.current.audioEl.current.play();
+    }
+
     if (sceneNum < 5) {
       setSceneNum(sceneNum + 1);
     } else {
@@ -142,6 +148,7 @@ export default function Story() {
 
   return (
     <Container>
+      <ReactAudioPlayer src="/sounds/enter.wav" ref={enterSound}/>
       {sceneNum == 0 && firstScene()}
       <FairyStory sceneNum={sceneNum} />
       <PinocchioStory sceneNum={sceneNum} />

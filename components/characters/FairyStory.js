@@ -53,8 +53,8 @@ const FairyStory = ({ sceneNum }) => {
             <Image src="/images/fairy1.svg" alt="fairy" width={378} height={737} />
           </FairyStoryContainer>
           <SpeechContainer type="bottomright">
-            Sure, You need to return to a real boy and unlock 7 skills as the
-            keys to save them.
+            Sure, to save your friends and return to a real boy you need to unlock 8 skills as the
+            key to save them.
           </SpeechContainer>
         </>
       );
@@ -65,7 +65,7 @@ const FairyStory = ({ sceneNum }) => {
             <Image src="/images/fairy1.svg" alt="fairy" width={378} height={737} />
           </FairyStoryContainer>
           <SpeechContainer type="bottomright">
-            Only you unlock all skills can you guys back to the fairy tale.
+            Only once you've unlocked all skills can your friends go back to the fairy tale.
           </SpeechContainer>
         </>
       );
@@ -76,7 +76,7 @@ const FairyStory = ({ sceneNum }) => {
             <Image src="/images/fairy.svg" alt="fairy" width={522} height={714} />
           </FairyStoryFinalContainer>
           <SpeechFinalContainer type="right">
-            Please complete each quiz within 3 chances of making mistakes to
+            Please complete each quiz, you have 3 chances of making mistakes to
             unlock each skill.
           </SpeechFinalContainer>
         </>

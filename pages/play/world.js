@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import LevelIcon from "../../components/levelIcon";
 import styles from "../../styles/World.module.css";
 import cookieCutter from "cookie-cutter";
-import useSoundEffect from "../../components/hooks/useSoundEffect";
 import ReactAudioPlayer from "react-audio-player";
 
 export default function World(props) {
