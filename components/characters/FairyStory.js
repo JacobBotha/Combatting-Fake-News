@@ -34,6 +34,12 @@ const SpeechFinalContainer = styled(SpeechContainer)`
   width: 36%;
 `;
 
+/**
+ * Depending on the current scene id, display the fairy character with 
+ * the appropriate speech for that scene.
+ * 
+ * @param {int} sceneNum - The id of the current scene
+ */
 const FairyStory = ({ sceneNum }) => {
   switch (sceneNum) {
     case 1:
