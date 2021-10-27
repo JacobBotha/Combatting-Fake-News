@@ -24,6 +24,12 @@ const SpeechContainer = styled(SpeechBubble)`
   text-align: center;
 `;
 
+/**
+ * Depending on the current scene id, display the pinocchio character 
+ * with the appropriate speech for that scene.
+ * 
+ * @param {int} sceneNum - The id of the current scene
+ */
 const PinocchioStory = ({sceneNum}) => {
   switch (sceneNum) {
     case 1:

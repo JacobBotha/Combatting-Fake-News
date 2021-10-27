@@ -54,6 +54,16 @@ const SpeechArrowBottomR = styled.div`
   border-right: 10px solid transparent;
 `;
 
+
+/**
+ * Constructs a speech bubble component used to display speech from 
+ * characters. 
+ * 
+ * @param {string} color - The color of the speechbubble, defaults to 
+ * "#9dcae6".
+ * @param {string} type - The type (direction) of  the speechbubble, either 
+ * left, right, bottomleft or bottomright.
+ */
 const SpeechBubble = ({ className, color, type, children }) => {
   if (type == "right") {
     return (

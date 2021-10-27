@@ -49,7 +49,6 @@ const WrongButton = styled.div`
   width: 21.5%;
   cursor: pointer;
   opacity:  ${(props) => props.isSelected ? 1 : 0.4};
-
   &:hover {
     transform: scale(${(props) => props.isSubmitted ? 1 : 1.2});
   }
@@ -76,9 +75,23 @@ const AnswerText = styled.div`
 
 const colors = ["#EFD55E", "#FF7777", "#F9C2A3", "#B7AACB"];
 
+/**
+ * Constructs a series of buttons to be displayed for a corresponding question. 
+ * Questions can either be true/false or multiple choice.
+ * The questiontype and answer data are passed through the question prop and
+ * depending on the type of question either true/false buttons are returned
+ * or up to a max of 4 multiple choice buttons are returned. Each button has
+ * a callback function that updates the current answer when clicked.
+ * 
+ * @param {function name(answer, id)} answerQuestion - callback function for 
+ * clicking on the button
+ * @param {int} isSelected - The index of the button currently selected
+ * @param {boolean} isSubmitted - Wether the current question has been submitted
+ */
 const Answers = ({ className, answerQuestion, question, isSelected, isSubmitted }) => {
   if (question.questionType == "True or False") {
     return (
+
       <AnswerBoxTF className={className}>
         <Container>
           <CorrectButton
@@ -103,6 +116,7 @@ const Answers = ({ className, answerQuestion, question, isSelected, isSubmitted 
       </AnswerBoxTF>
     );
   } else if (question.questionType == "Multiple Choice") {
+    // Up to a max of 4 multiple choice answers allowed
     return (
       <AnswerBox className={className}>
         <Container>
@@ -116,6 +130,7 @@ const Answers = ({ className, answerQuestion, question, isSelected, isSubmitted 
       </AnswerBox>
     );
   } else {
+    // Other quesion types are not defined
     return <AnswerCircle>ERROR</AnswerCircle>;
   }
 };

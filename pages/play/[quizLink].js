@@ -15,7 +15,7 @@ import CountDown from "../../components/count_down";
 import LevelCard from "../../components/LevelCard";
 import FairyQuiz from "../../components/characters/FariyQuiz";
 import FairyQuestion from "../../components/characters/FariyQuestion";
-import Answers from "../../components/button/answer_button";
+import Answers from "../../components/button/AnswerButton";
 import ReactAudioPlayer from "react-audio-player";
 
 const Container = styled.div`
