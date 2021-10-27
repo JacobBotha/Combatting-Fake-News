@@ -15,8 +15,14 @@ const ContainerH = styled.div`
 const HeartContainer = styled.div`
   flex: 1;
   margin-right: 5%;
-`;
 
+`;
+/**
+ * Constructs a health bar for the play page.
+ * 
+ * @param {int} health - The health of the player, dictates how many hearts
+ *  are coloured in red.
+ */
 const HealthBar = ({ health }) => {
     return (
         <ContainerH>

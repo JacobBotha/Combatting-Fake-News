@@ -18,15 +18,16 @@ const Container = styled.div`
   margin: auto;
 `;
 
+//Skip button
 const LeftButton = styled.div`
   position: absolute;
   width: 14%;
   bottom: 3%;
   left: 1%;
-  
   cursor: pointer;
 `;
 
+//next button
 const RightButton = styled.div`
   position: absolute;
   width: 14%;
@@ -35,6 +36,7 @@ const RightButton = styled.div`
   cursor: pointer;
 `;
 
+//Final next button
 const CenterButton = styled.div`
   position: absolute;
   width: 14%;
@@ -77,11 +79,19 @@ const FakeNewsTextShadow = styled(FakeNewsText)`
   font-size: max(14vh, 84px);
 `;
 
+/**
+ * The story page, consists of 6 scenes. Pressing the next
+ * button progresses to the next scene. Pressing the skip button
+ * or pressing the next button on the final scene routes to the
+ * world page.
+ */
 export default function Story() {
   const [sceneNum, setSceneNum] = useState(0);
   const enterSound = useRef(null)
   const router = useRouter();
 
+  // Go to the next 'scene' in the story, 
+  // after the final scene direct to the world page
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -96,6 +106,9 @@ export default function Story() {
     }
   };
 
+
+  // Display the buttons for each scene,
+  // the final scene no longer has a skip button as it is redundant
   const buttons = () => {
     if (sceneNum < 5) {
       return (
@@ -133,6 +146,7 @@ export default function Story() {
     }
   };
 
+  // The initial scene in the story, includes the jail and fake news text.
   const firstScene = () => {
     return (
       <>

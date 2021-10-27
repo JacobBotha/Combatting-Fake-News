@@ -42,6 +42,16 @@ const Numerator = styled.span`
   color: #F6F605;
 `;
 
+/**
+ * Constructs a component that indicates how many questions are left with a 
+ * numerical value as well as the length of pinocchio's nose.
+ * 
+ * @param {int} questionNum - The current question number.
+ * @param {int} questionMax - The maximum number of questions in the current 
+ * quiz.
+ * @param {boolean} isFinished - Whether the quiz has been completed, to 
+ * show the finished state.
+ */
 const NoseBar = ({ questionNum, questionMax, isFinished }) => {
 
   const questionsLeft = (questionMax - questionNum + 1);
