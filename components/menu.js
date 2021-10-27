@@ -4,8 +4,14 @@ import SignedIn from "./loginStatus";
 
 import Image from 'next/image';
 
-
-
+/**
+ * The Menu with the logo and the mute button. The mute status is stored
+ * in local storage so even when the user quits the page. The status is 
+ * saved.
+ * 
+ * @param {*} props 
+ * @returns 
+ */
 export default function Menu(props) { 
     const [muted, setMuted] = useState(null);
 
@@ -32,17 +38,15 @@ export default function Menu(props) {
     
     return (
         <div>
-            {/* <div className={styles.container}>             */}
-                <div className={styles.avatar}>
-                    <Image src='/images/Level1.svg'width="100%" height="100%"  alt=''></Image>
-                </div>
-                <div className={styles.speaker}>
-                    <Image src={muted ? '/images/mute.svg' : '/images/speaker.svg'} width="100%" height="100%" onClick={muteSound}></Image>
-                </div>
-                <div className={styles.dropdown}>
-                    <SignedIn></SignedIn>
-                </div>
-            {/* </div> */}
+            <div className={styles.avatar}>
+                <Image src='/images/Level1.svg'width="100%" height="100%"  alt=''></Image>
+            </div>
+            <div className={styles.speaker}>
+                <Image src={muted ? '/images/mute.svg' : '/images/speaker.svg'} width="100%" height="100%" onClick={muteSound}></Image>
+            </div>
+            <div className={styles.dropdown}>
+                <SignedIn></SignedIn>
+            </div>
         </div>
     );
 }

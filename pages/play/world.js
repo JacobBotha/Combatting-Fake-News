@@ -16,7 +16,7 @@ export default function World(props) {
   const targetRef = useRef();
   const [dimensions, setDimensions] = useState({ width:0, height: 0 });
   const [levels, setLevels] = useState([]);
-  const [endWorld, setEndWorld] = useState(true);
+  const [endWorld, setEndWorld] = useState(false);
   const enterSound = useRef(null);
   const finishSound = useRef(null);
   const router = useRouter();

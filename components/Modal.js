@@ -11,9 +11,25 @@ const ModalBackgroud = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 99999;
+`
+const SmallModalBox = styled.div`
+    width: 30%;
+    height: 80%;
+    background: #B7AACB;
+    opacity: 100%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+    z-index: 999999;
 `
 
 const ModalBox = styled.div`
+    position: relative;
     width: 50%;
     height: 80%;
     background: #B7AACB;
@@ -25,6 +41,7 @@ const ModalBox = styled.div`
     padding-left: 50px;
     padding-right: 50px;
     text-align: center;
+    z-index: 999999;
 `
 const CloseButton = styled.div`
     margin-left:97%;
@@ -34,12 +51,24 @@ const CloseButton = styled.div`
     cursor: pointer;
 `
 
-export default function Modal({children, closeModal}) {
+export default function Modal({children, closeModal, size}) {
+    if(size === "small") {
+        return (
+        <ModalBackgroud>
+            <SmallModalBox>
+                <CloseButton onClick={closeModal}>
+                    <Image src="/images/close.svg" width="30px" height="30px"></Image>
+                </CloseButton>
+                {children}
+            </SmallModalBox>
+        </ModalBackgroud>
+        )
+    }
     return (
         <ModalBackgroud>
             <ModalBox>
                 <CloseButton onClick={closeModal}>
-                    <Image style={{cursor: "pointer"}} src="/images/close.svg" width="30px" height="30px"></Image>
+                    <Image src="/images/close.svg" width="30px" height="30px"></Image>
                 </CloseButton>
                 {children}
             </ModalBox>

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import cookieCutter from "cookie-cutter";
+import ReactAudioPlayer from "react-audio-player";
 
 import styled from "styled-components";
 import styles from "../../styles/Quiz.module.css";
@@ -13,10 +14,10 @@ import Question from "../../components/Question";
 import NoseBar from "../../components/NoseBar";
 import CountDown from "../../components/count_down";
 import LevelCard from "../../components/LevelCard";
-import FairyQuiz from "../../components/characters/FariyQuiz";
-import FairyQuestion from "../../components/characters/FariyQuestion";
+import FairyQuiz from "../../components/characters/FairyQuiz";
+import FairyQuestion from "../../components/characters/FairyQuestion";
 import Answers from "../../components/button/AnswerButton";
-import ReactAudioPlayer from "react-audio-player";
+import Modal from "../../components/Modal";
 
 const Container = styled.div`
   position: relative;
@@ -58,6 +59,13 @@ const SkipButton = styled.div`
   cursor: pointer;
 `;
 
+const Hint = styled.div`
+  position: absolute;
+  bottom: 35%;
+  right: 4.5%;
+  cursor: pointer;
+`
+
 export default function Quiz({ quiz, questions, level }) {
   //currentAnswer is the key of the answer button
   const [currentAnswer, setCurrentAnswer] = useState(-1);
@@ -69,6 +77,7 @@ export default function Quiz({ quiz, questions, level }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const endSound = useRef(null);
 
   const router = useRouter();
@@ -179,6 +188,9 @@ export default function Quiz({ quiz, questions, level }) {
             <Image src="/images/next.svg" alt="next" width={150} height={150} />
           </SkipButton>
         )}
+        <Hint onClick={() => setShowHint(true)}>
+          <Image src={showHint ? "/images/hint-open.svg" : "/images/hint-close.svg"} width="150" height="150"></Image>
+        </Hint>
       </>
     );
   };
@@ -199,8 +211,15 @@ export default function Quiz({ quiz, questions, level }) {
     );
   };
 
+  // The modal that displays the hint for the questoin
+  const hintModal  = <Modal closeModal={() => setShowHint(false)} size="small">
+    <h1 style={{color: "#EFD55E", fontSize: "3.5em"}}>Hint!</h1>
+    <p style={{color: "white", fontSize:"2em"}}>{questions[questionIndex].hint}</p>
+  </Modal>
+
   const quizScreen = function () {
     return (
+      <>
       <Container>
         <NoseBar
           questionNum={questionIndex + 1}
@@ -215,6 +234,7 @@ export default function Quiz({ quiz, questions, level }) {
         )}
         {finished ? endScreen() : isSubmitted ? questionEnd() : questionBody()}
       </Container>
+      </>
     );
   };
 
@@ -271,7 +291,11 @@ export default function Quiz({ quiz, questions, level }) {
     );
   };
 
-  return <div>{quizStarted == false ? loadingScreen() : quizScreen()}</div>;
+  return (
+    <div>
+      {showHint ? hintModal : null}
+      {quizStarted == false ? loadingScreen() : quizScreen()}
+    </div>);
 }
 
 export async function getServerSideProps(context) {
