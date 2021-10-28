@@ -197,9 +197,6 @@ export default function Quiz({ quiz, questions, level }) {
   };
 
   const questionEnd = () => {
-    console.log("Current Answer", currentAnswer)
-    console.log("Finished: ", finished)
-    console.log("Failed: ", failed)
     return (
       <>
         <ReactAudioPlayer
