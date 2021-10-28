@@ -126,6 +126,7 @@ export default function Quiz({ quiz, questions, level }) {
         if (health - 1 <= 0) {
           setHealth(0);
           setFailed(true);
+          // setFinished(true);
         }
         setHealth(health - 1);
       }
@@ -147,7 +148,7 @@ export default function Quiz({ quiz, questions, level }) {
         setIsSubmitted(false);
         setFailed(false);
         setFinished(false);
-      };
+      }; 
 
   const loadingScreen = function () {
     return (
@@ -196,6 +197,9 @@ export default function Quiz({ quiz, questions, level }) {
   };
 
   const questionEnd = () => {
+    console.log("Current Answer", currentAnswer)
+    console.log("Finished: ", finished)
+    console.log("Failed: ", failed)
     return (
       <>
         <ReactAudioPlayer
@@ -278,7 +282,7 @@ export default function Quiz({ quiz, questions, level }) {
             <Image src="/images/next.svg" alt="next" width={150} height={150} />
           </SkipButton>
         ) : (
-            <SkipButton onClick={resetQuiz()}>
+            <SkipButton onClick={resetQuiz}>
               <Image
                 src="/images/restart.svg"
                 alt="restart"

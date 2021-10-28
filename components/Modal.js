@@ -15,7 +15,8 @@ const ModalBackgroud = styled.div`
 `
 const SmallModalBox = styled.div`
     width: 30%;
-    height: 80%;
+    height: 50%;
+    min-height: 580px;
     background: #B7AACB;
     opacity: 100%;
     border-radius: 16px;
