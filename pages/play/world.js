@@ -30,7 +30,8 @@ export default function World(props) {
       alteredlevels.sort((a, b) => a.levelNumber - b.levelNumber).forEach((level, index, levels) => {
         //Check cookies if the level has been completed, and make available if it has
         if (cookieCutter.get(level.link) === "complete") {
-          if (index < levels.length) levels[index + 1]["isAvailable"] = true;
+          console.log(index, levels.length)
+          if (index < levels.length -1) levels[index + 1]["isAvailable"] = true;
           level["isAvailable"] = true;
         }
         return level;
@@ -97,11 +98,14 @@ export default function World(props) {
    * Redirict to a quiz
    * @param {String} slug - The unique string identifying the quiz
    */
-  const enterLevel = (slug) => {
-    if (enterSound !== null && window.localStorage.getItem("muted") !== "true") {
-      enterSound.current.audioEl.current.play();
+  const enterLevel = (slug, available) => {
+    if (available) {
+      if (enterSound !== null && window.localStorage.getItem("muted") !== "true") {
+        enterSound.current.audioEl.current.play();
+      }
+      router.push("/play/" + slug);
     }
-    router.push("/play/" + slug);
+
   }
 
   // The modal when all levels have been completed
@@ -117,7 +121,7 @@ export default function World(props) {
           // The icon for each level
           return (
             <div key={level.levelNumber} className={level.isAvailable ? styles.container : styles.containerUnavailable} style={level.position}>
-              <LevelIcon enterLevel={() => enterLevel(level.link)} level={level}></LevelIcon>
+              <LevelIcon enterLevel={() => enterLevel(level.link, level.isAvailable)} level={level}></LevelIcon>
             
             </div>
           )
