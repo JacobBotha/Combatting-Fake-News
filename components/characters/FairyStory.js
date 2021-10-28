@@ -71,7 +71,7 @@ const FairyStory = ({ sceneNum }) => {
             <Image src="/images/fairy1.svg" alt="fairy" width={378} height={737} />
           </FairyStoryContainer>
           <SpeechContainer type="bottomright">
-            Only once you've unlocked all skills can your friends go back to the fairy tale.
+            Only once you&apos;ve unlocked all skills can your friends go back to the fairy tale.
           </SpeechContainer>
         </>
       );
